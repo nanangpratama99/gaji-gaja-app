@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tugas_ubah/tugas6/screens/forgotPass/reset_page.dart';
+import 'package:tugas_ubah/app/screens/auth/forgotpass/reset_page.dart';
 
-import '../../color/constant.dart';
+import '../../../color/constant.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -21,10 +21,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: Stack(
           children: [
             Positioned(
-                top: 50,
-                right: 0,
-                left: 0,
-                child: Image.asset("asset/image/forgot_password.png")),
+              top: 50,
+              right: 0,
+              left: 0,
+              child: Image.asset(
+                "asset/image/forgot_password.png",
+                width: 250,
+                height: 250,
+              ),
+            ),
             // FORM LOGIN
             // --------------
 
@@ -174,12 +179,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ResetPage(),
-                                      ),
-                                    );
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ResetPage()));
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
@@ -198,6 +201,28 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   ),
                                 ),
                               ),
+
+                              SizedBox(
+                                height: 20,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_back,
+                                      color: Colors.grey,
+                                    ),
+                                    Text(
+                                      "Back",
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),

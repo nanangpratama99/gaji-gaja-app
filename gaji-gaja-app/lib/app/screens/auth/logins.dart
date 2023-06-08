@@ -1,13 +1,11 @@
 import 'dart:convert';
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tugas_ubah/tugas6/screens/forgotPass/forgot_password.dart';
-import '../cubits/cubit/login_cubit.dart';
-import 'register.dart';
-import '../color/constant.dart';
-// import 'package:gaji_gaja/screen/home_screen.dart';
-import '../models/user_service.dart';
+import '../../color/constant.dart';
+import '../../cubits/cubit/login_cubit.dart';
+import 'forgotpass/forgot_password.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
@@ -48,8 +46,12 @@ class _LoginScreenState extends State<LoginScreen> {
             },
             body: jsonEncode(data));
     code = response.statusCode;
-    print(response2.body);
-    print(jsonDecode(response2.body)['roleId']);
+    try {
+      print(response2.body);
+      print(jsonDecode(response2.body)['roleId']);
+    } catch (e) {
+      print(e);
+    }
 
     return response;
   }
@@ -111,24 +113,35 @@ class _LoginScreenState extends State<LoginScreen> {
                           // FORM INPUT
                           TextFormField(
                             controller: _emailController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your';
+                              }
+                              if (!EmailValidator.validate(value)) {
+                                return 'Please Enter Right Email';
+                              }
+
+                              return null;
+                            },
                             style: TextStyle(
                                 color: Color.fromARGB(255, 45, 45, 45)),
                             decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                      width: 1, color: Colors.grey),
-                                ),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                ),
-                                hintText: " Email",
-                                hintStyle: GoogleFonts.poppins(
-                                    fontSize: 16, color: Colors.grey),
-                                prefixIcon: Icon(
-                                  IconlyBold.message,
-                                  color: Colors.grey,
-                                )),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                    width: 1, color: Colors.grey),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              hintText: " Email",
+                              hintStyle: GoogleFonts.poppins(
+                                  fontSize: 16, color: Colors.grey),
+                              prefixIcon: Icon(
+                                IconlyBold.message,
+                                color: Colors.grey,
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 25),
                           TextFormField(
@@ -137,8 +150,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             //   user.password = val;
                             // },
                             validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Email is Empty';
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your password';
                               }
                               return null;
                             },
@@ -239,47 +252,40 @@ class _LoginScreenState extends State<LoginScreen> {
                                     primaryColor, // Warna latar belakang tombol
                               ),
                               onPressed: () async {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Center(
-                                        child: CircularProgressIndicator());
-                                  },
-                                );
-                                print(_emailController.text);
-                                await postData(
-                                  {
-                                    "email": _emailController.text,
-                                    "password": _passwordController.text,
-                                  },
-                                ).then((value) => {
-                                      Navigator.pop(context),
-                                      if (code == 500)
-                                        {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                                content: Text(
-                                                    'Email / Password Salah')),
-                                          )
-                                        }
-                                      else
-                                        {context.read<LoginCubit>().login(1)}
-                                    });
-                                // if (testingcuy == 200) {
-                                //   if (role == 1) {
-                                //     context.read<LoginCubit>().login(1);
-                                //   } else {
-                                //     context.read<LoginCubit>().login(2);
-                                //   }
-                                //   Navigator.pop(context);
-                                // } else {
-                                //   Navigator.pop(context);
-                                //   ScaffoldMessenger.of(context).showSnackBar(
-                                //     const SnackBar(
-                                //         content: Text('Email / Password Salah')),
-                                //   );
-                                // }
+                                if (_formKey.currentState!.validate()) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    },
+                                  );
+                                  print(_emailController.text);
+                                  await postData(
+                                    {
+                                      "email": _emailController.text,
+                                      "password": _passwordController.text,
+                                    },
+                                  ).then((value) => {
+                                        Navigator.pop(context),
+                                        if (code == 500)
+                                          {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                  backgroundColor: Colors.red,
+                                                  content: Text(
+                                                    'Email / Password Salah',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )),
+                                            )
+                                          }
+                                        else
+                                          {context.read<LoginCubit>().login(1)}
+                                      });
+                                }
+                                ;
                               },
                               child: Text(
                                 'Sign In',

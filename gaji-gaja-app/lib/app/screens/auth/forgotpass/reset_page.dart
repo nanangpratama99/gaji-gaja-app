@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../color/constant.dart';
+import '../../../color/constant.dart';
 
 class ResetPage extends StatefulWidget {
   const ResetPage({super.key});
@@ -20,10 +20,15 @@ class _ResetPageState extends State<ResetPage> {
         child: Stack(
           children: [
             Positioned(
-                top: 50,
-                right: 0,
-                left: 0,
-                child: Image.asset("asset/image/resetpass.png")),
+              top: 50,
+              right: 0,
+              left: 0,
+              child: Image.asset(
+                "asset/image/resetpass.png",
+                width: 200,
+                height: 200,
+              ),
+            ),
             // FORM LOGIN
             // --------------
 

@@ -2,14 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tugas_ubah/tugas6/screens/category_screens.dart';
-import 'package:tugas_ubah/tugas6/screens/product_list_screen.dart';
-import 'package:tugas_ubah/tugas6/screens/screens.dart';
-import 'package:tugas_ubah/tugas6/user/kalender3.dart';
 
-import '../admin/admin.dart';
 import '../cubits/cubit/login_cubit.dart';
-import '../screens/logins.dart';
+import '../screens/auth/logins.dart';
+import '../screens/main_view.dart';
 
 class AppRouter {
   final LoginCubit loginCubit;
@@ -18,6 +14,7 @@ class AppRouter {
   late final GoRouter router = GoRouter(
       debugLogDiagnostics: true,
       routes: <GoRoute>[
+        // login screen
         GoRoute(
           path: '/login',
           name: 'login',
@@ -25,32 +22,14 @@ class AppRouter {
             return const LoginScreen();
           },
         ),
+
+        // home screen
         GoRoute(
           path: '/',
           name: 'home',
           builder: (BuildContext context, GoRouterState state) {
             // return const AdminPage();
-            return const Text("Login Berhasil");
-          },
-          routes: [
-            GoRoute(
-              path: 'product_list/:category',
-              name: 'product_list',
-              builder: (BuildContext context, GoRouterState state) {
-                return ProductListScreen(
-                  category: state.params['category']!,
-                  asc: state.queryParams['sort'] == 'asc',
-                  quantity: int.parse(state.queryParams['filter'] ?? '0'),
-                );
-              },
-            ),
-          ],
-        ),
-        GoRoute(
-          path: '/a',
-          name: 'homa',
-          builder: (BuildContext context, GoRouterState state) {
-            return Calendar();
+            return const MainView();
           },
         ),
       ],
