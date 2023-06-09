@@ -33,14 +33,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<http.Response> postData(Map<String, String> data) async {
     final response =
-        await http.post(Uri.parse("http://192.168.0.13:8081/user/loginV2"),
+        await http.post(Uri.parse("http://localhost:8081/user/loginV2"),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
             body: jsonEncode(data));
 
     final response2 =
-        await http.post(Uri.parse("http://192.168.0.13:8081/user/findEmail"),
+        await http.post(Uri.parse("http://localhost:8081/user/findEmail"),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
