@@ -47,6 +47,7 @@ dependencies:
   flutter_iconly: ^1.0.2
   sweetalert: ^0.0.1
   art_sweetalert: ^0.0.5
+  shared_preferences: ^2.1.2
   
 
 dev_dependencies:
