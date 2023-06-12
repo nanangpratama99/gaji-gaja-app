@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tugas_ubah/app/cubits/cubit/login_cubit.dart';
 
 import 'app/router/app_router.dart';
-// import 'package:flutter_go_router/config/app_router.dart';
 
 void main() {
   runApp(const MyApp());

@@ -43,7 +43,7 @@ class _ResetPageState extends State<ResetPage> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        top: 250, left: 30, right: 30, bottom: 30),
+                        top: 250, left: 20, right: 20, bottom: 30),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,

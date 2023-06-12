@@ -37,14 +37,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               child: SingleChildScrollView(
                 child: Container(
                   margin:
-                      const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                      const EdgeInsets.only(left: 15, right: 15, bottom: 10),
                   // height: 450,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        top: 250, left: 30, right: 30, bottom: 30),
+                        top: 250, left: 20, right: 20, bottom: 30),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,26 +110,23 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   ),
                                   Container(
                                     height: 60,
-                                    width: 100,
+                                    width: 60,
                                     child: ElevatedButton(
                                       onPressed: () {},
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              10), // Radius sudut tombol
+                                          borderRadius:
+                                              BorderRadius.circular(50),
                                         ),
-                                        primary:
-                                            primaryColor, // Warna latar belakang tombol
+                                        primary: primaryColor,
                                       ),
-                                      child: Text(
-                                        'Sent',
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 17,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600),
+                                      child: Icon(
+                                        Icons.arrow_forward,
+                                        size: 30,
+                                        color: Colors.white,
                                       ),
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
                               // ==========
