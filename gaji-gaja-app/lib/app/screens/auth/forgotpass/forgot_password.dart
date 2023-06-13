@@ -21,7 +21,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: Stack(
           children: [
             Positioned(
-              top: 50,
+              top: 20,
               right: 0,
               left: 0,
               child: Image.asset(
@@ -49,28 +49,28 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Forgot",
                           style: TextStyle(
                               fontSize: 35,
                               fontWeight: FontWeight.w600,
                               color: Colors.black54),
                         ),
-                        Text(
+                        const Text(
                           "Password",
                           style: TextStyle(
                               fontSize: 35,
                               fontWeight: FontWeight.w600,
                               color: Colors.black54),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          "dont worry, please enter your password for reset your password",
+                        const Text(
+                          "dont worry, please enter your Email for reset your password",
                           style: TextStyle(fontSize: 12, color: Colors.black45),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Form(
@@ -81,7 +81,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 children: [
                                   Expanded(
                                     child: TextFormField(
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color:
                                               Color.fromARGB(255, 45, 45, 45)),
                                       decoration: InputDecoration(
@@ -98,14 +98,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                         hintText: " Email",
                                         hintStyle: GoogleFonts.poppins(
                                             fontSize: 16, color: Colors.grey),
-                                        prefixIcon: Icon(
+                                        prefixIcon: const Icon(
                                           IconlyBold.message,
                                           color: Colors.grey,
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 15,
                                   ),
                                   Container(
@@ -118,9 +118,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                           borderRadius:
                                               BorderRadius.circular(50),
                                         ),
-                                        primary: primaryColor,
+                                        primary: Color(0xFF014DAC),
                                       ),
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.arrow_forward,
                                         size: 30,
                                         color: Colors.white,
@@ -130,23 +130,23 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 ],
                               ),
                               // ==========
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                                children: const [
                                   Text(
-                                    "Enter your OTP Email",
+                                    "Enter your OTP Code",
                                     style: TextStyle(color: Colors.black54),
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Color.fromARGB(255, 45, 45, 45)),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -160,7 +160,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   hintText: " Enter OTP",
                                   hintStyle: GoogleFonts.poppins(
                                       fontSize: 16, color: Colors.grey),
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     IconlyBold.message,
                                     color: Colors.grey,
                                   ),
@@ -186,8 +186,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                       borderRadius: BorderRadius.circular(
                                           30), // Radius sudut tombol
                                     ),
-                                    primary:
-                                        primaryColor, // Warna latar belakang tombol
+                                    primary: Color(
+                                        0xFF014DAC), // Warna latar belakang tombol
                                   ),
                                   child: Text(
                                     'Verify OTP',
@@ -199,7 +199,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 ),
                               ),
 
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               GestureDetector(
@@ -208,7 +208,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
+                                  children: const [
                                     Icon(
                                       Icons.arrow_back,
                                       color: Colors.grey,
