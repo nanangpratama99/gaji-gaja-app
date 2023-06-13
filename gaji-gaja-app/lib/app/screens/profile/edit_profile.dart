@@ -60,9 +60,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                   _inputText("Full Name", IconlyLight.addUser),
                   _inputText("Email", IconlyLight.document),
                   _inputText("Phone Number", IconlyLight.call),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  sizedBoxH20,
                   _updateButton(context)
                 ],
               ),

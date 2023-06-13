@@ -75,16 +75,12 @@ class _ResetPageState extends State<ResetPage> {
                               fontWeight: FontWeight.w600,
                               color: Colors.black54),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        sizedBoxH10,
                         Text(
                           data['description']!,
                           style: TextStyle(fontSize: 12, color: Colors.black45),
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        sizedBoxH30,
                         Form(
                           child: Column(
                             children: [
@@ -100,9 +96,7 @@ class _ResetPageState extends State<ResetPage> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
+                              sizedBoxH10,
                               TextFormField(
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -142,9 +136,7 @@ class _ResetPageState extends State<ResetPage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 20,
-                              ),
+                              sizedBoxH20,
                               TextFormField(
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -184,9 +176,7 @@ class _ResetPageState extends State<ResetPage> {
                                 ),
                               ),
 
-                              const SizedBox(
-                                height: 40,
-                              ),
+                              sizedBoxH40,
                               // SIGN IN BUTTON
                               Container(
                                 height: 60,
@@ -218,9 +208,7 @@ class _ResetPageState extends State<ResetPage> {
                                 ),
                               ),
 
-                              const SizedBox(
-                                height: 20,
-                              ),
+                              sizedBoxH20,
                               GestureDetector(
                                 onTap: () {
                                   Navigator.pop(context);

@@ -96,9 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             height: 150,
                           ),
 
-                          const SizedBox(
-                            height: 25,
-                          ),
+                          sizedBoxH25,
                           // FORM INPUT
                           TextFormField(
                             controller: _emailController,
@@ -129,7 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: Colors.grey,
                                 )),
                           ),
-                          const SizedBox(height: 25),
+                          sizedBoxH25,
                           TextFormField(
                             controller: _passwordController,
                             validator: (value) {
@@ -184,7 +182,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 25),
+                          sizedBoxH25,
                           TextFormField(
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: _isVisibleConfirm,
@@ -236,9 +234,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
 
-                          const SizedBox(
-                            height: 40,
-                          ),
+                          sizedBoxH40,
                           // SIGN IN BUTTON
                           // ------------------
                           Container(
@@ -280,10 +276,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                           ),
+                          sizedBoxH20,
                           SizedBox(
-                            height: 20,
-                          ),
-                          Container(
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               children: [
@@ -330,7 +324,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 Future<http.Response> postData(Map<String, String> data) async {
   final response =
-      await http.post(Uri.parse("http://192.168.0.13:8081/register"),
+      await http.post(Uri.parse("http://$localAddress:8081/register"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },

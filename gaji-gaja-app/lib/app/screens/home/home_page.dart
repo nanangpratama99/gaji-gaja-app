@@ -58,9 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 3,
-                          ),
+                          sizedBoxH3,
                           Text(
                             jsonDecode(dataUser)['name'] ?? "null",
                             style: TextStyle(color: Colors.white, fontSize: 25),
