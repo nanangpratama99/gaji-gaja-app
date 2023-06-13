@@ -26,7 +26,7 @@ class _MainViewState extends State<MainView> {
   ];
 
   // list menu button
-  List<String> menuItems = ["Beranda", "Home", "Akun", "Contact"];
+  List<String> menuItems = ["Home", "Analytic", "Wallet", "Person"];
   List<IconData> iconItems = [
     IconlyLight.home,
     IconlyLight.activity,
@@ -47,8 +47,8 @@ class _MainViewState extends State<MainView> {
       body: Center(child: _pages[_selectedIndex]),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          // color: Color(0xFF014DAC),
-          color: Colors.white,
+          color: Color(0xFF014DAC),
+          // color: Colors.white,
 
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40.0), // adjust to your liking
@@ -75,6 +75,7 @@ class _MainViewState extends State<MainView> {
               BottomNavigationBarItem(
                 icon: Icon(
                   iconItems[0],
+                  size: 30,
                   color: Colors.white,
                 ),
                 label: menuItems[0],
@@ -82,6 +83,7 @@ class _MainViewState extends State<MainView> {
               BottomNavigationBarItem(
                 icon: Icon(
                   iconItems[1],
+                  size: 30,
                   color: Colors.white,
                 ),
                 label: menuItems[1],
@@ -89,6 +91,7 @@ class _MainViewState extends State<MainView> {
               BottomNavigationBarItem(
                 icon: Icon(
                   iconItems[2],
+                  size: 30,
                   color: Colors.white,
                 ),
                 label: menuItems[2],
@@ -96,6 +99,7 @@ class _MainViewState extends State<MainView> {
               BottomNavigationBarItem(
                 icon: Icon(
                   iconItems[3],
+                  size: 30,
                   color: Colors.white,
                 ),
                 label: menuItems[3],

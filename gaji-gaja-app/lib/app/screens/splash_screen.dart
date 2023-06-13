@@ -34,47 +34,46 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Stack(
-            children: [
-              Positioned(
-                top: 150,
-                right: 0,
-                left: 0,
-                child: Image.asset(
-                  'asset/image/logo.png',
-                  width: 200,
-                  height: 200,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          children: [
+            Positioned(
+              top: 50,
+              right: 50,
+              left: 50,
+              bottom: 50,
+              child: Image.asset(
+                'asset/image/logo.png',
+                fit: BoxFit.fitWidth,
+                width: 10,
+                height: 10,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Image.asset(
+                'asset/image/bg-splash.png',
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            Positioned(
+              // top: 0,
+              right: 0,
+              left: 0,
+              bottom: 15,
+              child: Center(
+                child: Text(
+                  'Ver.2.1.3',
+                  style: GoogleFonts.poppins(fontSize: 12, color: Colors.white),
                 ),
               ),
-              Positioned(
-                top: 440,
-                right: 0,
-                left: 0,
-                bottom: 0,
-                child: Image.asset(
-                  'asset/image/bg-splash.png',
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.fitWidth,
-                  height: MediaQuery.of(context).size.height,
-                ),
-              ),
-              Positioned(
-                // top: 0,
-                right: 0,
-                left: 0,
-                bottom: 15,
-                child: Center(
-                  child: Text(
-                    'Ver.2.1.3',
-                    style:
-                        GoogleFonts.poppins(fontSize: 12, color: Colors.white),
-                  ),
-                ),
-              )
-            ],
-          )),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

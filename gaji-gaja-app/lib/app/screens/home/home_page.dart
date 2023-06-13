@@ -119,8 +119,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
 Widget _cards(context) {
   return Container(
-    // margin: EdgeInsets.only(top: 20),
-    // width: MediaQuery.of(context).size.width / 1.1,
     height: MediaQuery.of(context).size.height / 3.4,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
@@ -203,6 +201,7 @@ Widget _mainCard(context) {
   );
 }
 
+// list menu
 Widget _listMenu() {
   List<String> itemsMenu = [
     "Item1",
