@@ -44,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -86,173 +86,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: borderRadius / 7,
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditProfileView(),
-                      ),
-                    );
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    child: Row(
-                      children: [
-                        Icon(
-                          IconlyBold.edit,
-                          color: Colors.blue[300],
-                        ),
-                        const SizedBox(width: 10),
-                        const Text(
-                          "Edit Profil",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        const Spacer(),
-                        const Icon(Icons.keyboard_arrow_right_outlined)
-                      ],
+              sizedBoxH30,
+              ListProfile(
+                icon: IconlyBold.edit,
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EditProfileView(),
                     ),
-                  ),
-                  style: TextButton.styleFrom(primary: Colors.black),
-                ),
+                  );
+                },
+                text: 'Edit Profile',
               ),
-              const SizedBox(
-                height: 10,
+              sizedBoxH10,
+              ListProfile(
+                icon: IconlyBold.setting,
+                onPress: () {},
+                text: 'Pengaturan Aplikasi',
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                // height: 55,
-                // width: 400,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: borderRadius / 7,
-                ),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    child: Row(
-                      children: [
-                        Icon(
-                          IconlyBold.setting,
-                          color: Colors.blue[300],
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          "Pengaturan Aplikasi",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        Spacer(),
-                        Icon(Icons.keyboard_arrow_right_outlined)
-                      ],
-                    ),
-                  ),
-                  style: TextButton.styleFrom(primary: Colors.black),
-                ),
+              sizedBoxH10,
+              ListProfile(
+                icon: IconlyBold.call,
+                onPress: () {},
+                text: 'Pusat Bantuan',
               ),
-              const SizedBox(
-                height: 10,
+              sizedBoxH10,
+              ListProfile(
+                icon: IconlyBold.logout,
+                onPress: () {
+                  context.read<LoginCubit>().logout();
+                },
+                text: 'Keluar',
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                // height: 55,
-                // width: 400,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: borderRadius / 7,
-                ),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    child: LayoutBuilder(
-                      builder:
-                          (BuildContext context, BoxConstraints constraints) {
-                        double containerWidth = constraints.maxWidth;
+              sizedBoxH10,
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-                        return Row(
-                          children: [
-                            Icon(
-                              IconlyBold.call,
-                              color: Colors.blue[300],
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              "Pusat Bantuan",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            Spacer(),
-                            Icon(Icons.keyboard_arrow_right_outlined)
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  style: TextButton.styleFrom(primary: Colors.black),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                // height: 55,
-                // width: 400,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: borderRadius / 7,
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    context.read<LoginCubit>().logout();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    child: LayoutBuilder(
-                      builder:
-                          (BuildContext context, BoxConstraints constraints) {
-                        double containerWidth = constraints.maxWidth;
+class ListProfile extends StatelessWidget {
+  const ListProfile(
+      {Key? key, required this.onPress, required this.icon, required this.text})
+      : super(key: key);
 
-                        return Row(
-                          children: [
-                            Icon(
-                              IconlyBold.logout,
-                              color: Colors.blue[300],
-                            ),
-                            const SizedBox(width: 10),
-                            const Text(
-                              "Keluar",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            const Spacer(),
-                            Icon(Icons.keyboard_arrow_right_outlined)
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  style: TextButton.styleFrom(primary: Colors.black),
-                ),
+  final VoidCallback onPress;
+  final IconData icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: borderRadius / 7,
+      ),
+      child: TextButton(
+        onPressed: onPress,
+        style: TextButton.styleFrom(primary: Colors.black),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: Row(
+            children: [
+              Icon(
+                icon,
+                color: Colors.blue[300],
               ),
-              const SizedBox(
-                height: 10,
+              sizedBoxH10,
+              Text(
+                text,
+                style: const TextStyle(fontSize: 16),
               ),
+              const Spacer(),
+              const Icon(Icons.keyboard_arrow_right_outlined)
             ],
           ),
         ),
