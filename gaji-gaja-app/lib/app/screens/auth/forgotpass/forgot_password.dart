@@ -3,6 +3,8 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_ubah/app/screens/auth/forgotpass/reset_page.dart';
 
+import '../../../constrant/constant.dart';
+
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
 
@@ -63,16 +65,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               fontWeight: FontWeight.w600,
                               color: Colors.black54),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        sizedBoxH10,
                         const Text(
                           "dont worry, please enter your Email for reset your password",
                           style: TextStyle(fontSize: 12, color: Colors.black45),
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        sizedBoxH30,
                         Form(
                           child: Column(
                             children: [
@@ -105,10 +103,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  Container(
+                                  sizedBoxH15,
+                                  SizedBox(
                                     height: 60,
                                     width: 60,
                                     child: ElevatedButton(
@@ -130,9 +126,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 ],
                               ),
                               // ==========
-                              const SizedBox(
-                                height: 20,
-                              ),
+                              sizedBoxH20,
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const [
@@ -142,9 +136,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
+                              sizedBoxH10,
                               TextFormField(
                                 style: const TextStyle(
                                     color: Color.fromARGB(255, 45, 45, 45)),
@@ -167,11 +159,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 ),
                               ),
 
-                              const SizedBox(
-                                height: 40,
-                              ),
+                              sizedBoxH40,
                               // SIGN IN BUTTON
-                              Container(
+                              SizedBox(
                                 height: 60,
                                 width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton(
@@ -199,9 +189,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 ),
                               ),
 
-                              const SizedBox(
-                                height: 20,
-                              ),
+                              sizedBoxH20,
                               GestureDetector(
                                 onTap: () {
                                   Navigator.pop(context);

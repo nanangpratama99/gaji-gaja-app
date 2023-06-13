@@ -113,9 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             'asset/image/logo.png',
                             fit: BoxFit.fitWidth,
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+                          sizedBoxH20,
                           // FORM INPUT
                           TextFormField(
                             controller: _emailController,
@@ -149,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 25),
+                          sizedBoxH25,
                           TextFormField(
                             controller: _passwordController,
                             validator: (value) {
@@ -203,9 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          sizedBoxH10,
                           Row(
                             children: [
                               Radio(
@@ -237,9 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+                          sizedBoxH20,
                           // SIGN IN BUTTON
                           // ------------------
                           Container(
@@ -299,9 +293,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
+                          sizedBoxH20,
                         ],
                       ),
                     ),
