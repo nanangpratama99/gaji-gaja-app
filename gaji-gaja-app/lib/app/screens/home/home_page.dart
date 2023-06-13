@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "Halo,",
                             style: TextStyle(
                               fontSize: 17,
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 3,
                           ),
                           Text(
@@ -66,10 +67,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      const Icon(
-                        IconlyLight.notification,
-                        color: Colors.white,
-                      ),
+                      IconButton(
+                        onPressed: () => exit(0),
+                        icon: const Icon(
+                          IconlyLight.notification,
+                          color: Colors.white,
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -82,26 +86,25 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade600,
-                        spreadRadius: 1,
-                        blurRadius: 20,
-                        offset: const Offset(5, 10),
-                      )
-                    ]),
+                // decoration: BoxDecoration(
+                //     color: Colors.white,
+                //     borderRadius: const BorderRadius.only(
+                //       topLeft: Radius.circular(30),
+                //       topRight: Radius.circular(30),
+                //     ),
+                //     boxShadow: [
+                //       BoxShadow(
+                //         color: Colors.grey.shade600,
+                //         spreadRadius: 1,
+                //         blurRadius: 20,
+                //         offset: const Offset(5, 10),
+                //       )
+                //     ]),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      // cards
-                      _cards(context),
-                      _detailCard(context),
+                      _listMenu(),
+                      _mainCard(context),
                     ],
                   ),
                 ),
@@ -116,7 +119,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
 Widget _cards(context) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     // margin: EdgeInsets.only(top: 20),
     // width: MediaQuery.of(context).size.width / 1.1,
     height: MediaQuery.of(context).size.height / 3.4,
@@ -126,95 +128,147 @@ Widget _cards(context) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width / 1.8,
-          padding: EdgeInsets.all(5),
-          height: 150,
-          decoration: BoxDecoration(
-            color: Colors.orange,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Analityc",
-                  style: TextStyle(
-                      color: Colors.white38, fontWeight: FontWeight.w600),
-                ),
-                const Text(
-                  "Rp. 3000.000",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
-                      "Company",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Text("Gpay", style: TextStyle(color: Colors.white)),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(left: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                width: 100,
-                height: 70,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(35, 0, 0, 0),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              Container(
-                width: 100,
-                height: 70,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(35, 0, 0, 0),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ],
-          ),
-        ),
+        _mainCard(context),
       ],
     ),
   );
 }
 
-Widget _detailCard(context) {
+Widget _mainCard(context) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 20),
-    width: MediaQuery.of(context).size.width,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          "Detail Saldo",
-          style: TextStyle(fontSize: 20),
-        ),
+    margin: EdgeInsets.only(top: 20),
+    width: MediaQuery.of(context).size.width / 1.1,
+    padding: EdgeInsets.all(5),
+    height: 250,
+    decoration: BoxDecoration(
+      color: Colors.blue,
+      borderRadius: BorderRadius.circular(40),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Analityc",
+                style: TextStyle(
+                    color: Colors.white38, fontWeight: FontWeight.w600),
+              ),
+              Container(
+                width: 70,
+                height: 70,
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.20),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Image.asset(
+                  "asset/image/logo-white.png",
+                  fit: BoxFit.cover,
+                ),
+              )
+            ],
+          ),
+          const Text(
+            "Rp. 3.000.000",
+            style: TextStyle(
+                color: Colors.white, fontSize: 33, fontWeight: FontWeight.w600),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Selengkapnya",
+                style: TextStyle(color: Colors.white, letterSpacing: 1),
+              ),
+              Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.20),
+                    borderRadius: BorderRadius.circular(30)),
+                child: const Icon(
+                  IconlyLight.arrowRight,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _listMenu() {
+  return Container(
+    margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+    height: 70,
+    child: ListView(
+      scrollDirection: Axis.horizontal,
+      children: <Widget>[
         Container(
-          padding: EdgeInsets.all(3),
+          width: 200,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            border: Border.all(
-              color: Color.fromARGB(255, 200, 200, 200),
+            color: primaryColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: const Center(
+            child: Text(
+              'Item 1',
+              style: TextStyle(fontSize: 18, color: Colors.white),
             ),
           ),
-          child: Icon(
-            IconlyLight.arrowRight,
-            color: Colors.grey,
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Container(
+          width: 200,
+          decoration: BoxDecoration(
+            color: primaryColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(15),
           ),
+          child: const Center(
+            child: Text(
+              'Item 2',
+              style: TextStyle(fontSize: 18, color: Colors.white),
+            ),
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Container(
+          width: 200,
+          decoration: BoxDecoration(
+            color: primaryColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: const Center(
+            child: Text(
+              'Item 3',
+              style: TextStyle(fontSize: 18, color: Colors.white),
+            ),
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Container(
+          width: 200,
+          decoration: BoxDecoration(
+            color: primaryColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: const Center(
+              child: Text(
+            'Item 4',
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          )),
         ),
       ],
     ),

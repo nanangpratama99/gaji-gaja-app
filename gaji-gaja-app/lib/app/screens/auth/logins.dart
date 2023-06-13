@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: SingleChildScrollView(
                 child: Container(
                   margin:
-                      const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   // height: 450,
                   decoration: BoxDecoration(
                     color: Colors.white60.withBlue(255),
@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             controller: _emailController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your';
+                                return 'Please enter your email';
                               }
                               if (!EmailValidator.validate(value)) {
                                 return 'Please Enter Right Email';
@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                               return null;
                             },
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color.fromARGB(255, 45, 45, 45)),
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               hintText: " Email",
                               hintStyle: GoogleFonts.poppins(
                                   fontSize: 16, color: Colors.grey),
-                              prefixIcon: Icon(
+                              prefixIcon: const Icon(
                                 IconlyBold.message,
                                 color: Colors.grey,
                               ),
@@ -151,9 +151,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 25),
                           TextFormField(
                             controller: _passwordController,
-                            // onChanged: (val) {
-                            //   user.password = val;
-                            // },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your password';

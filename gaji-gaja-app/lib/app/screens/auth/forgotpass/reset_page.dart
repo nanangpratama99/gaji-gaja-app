@@ -12,6 +12,19 @@ class ResetPage extends StatefulWidget {
 }
 
 class _ResetPageState extends State<ResetPage> {
+  // show hide password
+  bool _obscureText = true;
+  bool _obscureText2 = true;
+
+  // ===
+  Map<String, String> data = {
+    'title': 'Reset',
+    'title2': 'Password',
+    'description':
+        'dont worry, please enter new password for reset your password',
+    'subTitle': 'Cahange Pssword',
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,27 +62,27 @@ class _ResetPageState extends State<ResetPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Reset",
-                          style: TextStyle(
+                          data['title']!,
+                          style: const TextStyle(
                               fontSize: 35,
                               fontWeight: FontWeight.w600,
                               color: Colors.black54),
                         ),
                         Text(
-                          "Password",
-                          style: TextStyle(
+                          data['title2']!,
+                          style: const TextStyle(
                               fontSize: 35,
                               fontWeight: FontWeight.w600,
                               color: Colors.black54),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
-                          "dont worry, please enter new password for reset your password",
+                          data['description']!,
                           style: TextStyle(fontSize: 12, color: Colors.black45),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Form(
@@ -81,17 +94,25 @@ class _ResetPageState extends State<ResetPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Change Password",
+                                    data['subTitle']!,
                                     style: TextStyle(
                                         color: Colors.black54, fontSize: 20),
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
-                                style: TextStyle(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter new password';
+                                  }
+                                  return null;
+                                },
+                                obscureText: _obscureText,
+                                keyboardType: TextInputType.visiblePassword,
+                                style: const TextStyle(
                                     color: Color.fromARGB(255, 45, 45, 45)),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -105,17 +126,34 @@ class _ResetPageState extends State<ResetPage> {
                                   hintText: " Enter your new password",
                                   hintStyle: GoogleFonts.poppins(
                                       fontSize: 16, color: Colors.grey),
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     IconlyBold.password,
                                     color: Colors.grey,
                                   ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(_obscureText
+                                        ? Icons.visibility_off
+                                        : Icons.visibility),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscureText = !_obscureText;
+                                      });
+                                    },
+                                  ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               TextFormField(
-                                style: TextStyle(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter new password';
+                                  }
+                                  return null;
+                                },
+                                obscureText: _obscureText2,
+                                style: const TextStyle(
                                     color: Color.fromARGB(255, 45, 45, 45)),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -129,9 +167,19 @@ class _ResetPageState extends State<ResetPage> {
                                   hintText: " Confirm your password",
                                   hintStyle: GoogleFonts.poppins(
                                       fontSize: 16, color: Colors.grey),
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     IconlyBold.password,
                                     color: Colors.grey,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(_obscureText2
+                                        ? Icons.visibility_off
+                                        : Icons.visibility),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscureText2 = !_obscureText2;
+                                      });
+                                    },
                                   ),
                                 ),
                               ),
