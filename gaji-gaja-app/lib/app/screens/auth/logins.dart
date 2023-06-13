@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -36,14 +37,14 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<http.Response> postData(Map<String, String> data) async {
     print(data);
     final response =
-        await http.post(Uri.parse("http://192.168.0.12:8081/user/loginV2"),
+        await http.post(Uri.parse("http://$localAddress:8081/user/loginV2"),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
             body: jsonEncode(data));
 
     final response2 =
-        await http.post(Uri.parse("http://192.168.0.12:8081/user/findEmail"),
+        await http.post(Uri.parse("http://$localAddress:8081/user/findEmail"),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
@@ -160,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: _isVisible,
                             focusNode: textFieldFocusNode,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color.fromARGB(255, 45, 45, 45)),
                             decoration: InputDecoration(
                               fillColor: Colors.transparent,
@@ -182,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   GoogleFonts.poppins(color: Colors.grey),
                               hintStyle: GoogleFonts.poppins(
                                   fontSize: 16, color: Colors.grey),
-                              prefixIcon: Icon(
+                              prefixIcon: const Icon(
                                 Icons.lock_rounded,
                                 size: 24,
                                 color: Colors.grey,
@@ -202,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Row(

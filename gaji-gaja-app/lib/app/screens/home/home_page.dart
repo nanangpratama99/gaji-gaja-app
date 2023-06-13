@@ -19,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
       body: SafeArea(
         child: Stack(
           children: [
@@ -39,7 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 margin: EdgeInsets.symmetric(vertical: 10),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 13),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -204,73 +204,37 @@ Widget _mainCard(context) {
 }
 
 Widget _listMenu() {
+  List<String> itemsMenu = [
+    "Item1",
+    "Item2",
+    "Item3",
+    "Item4",
+  ];
+
   return Container(
     margin: EdgeInsets.only(top: 20, left: 20, right: 20),
     height: 70,
-    child: ListView(
+    child: ListView.builder(
       scrollDirection: Axis.horizontal,
-      children: <Widget>[
-        Container(
-          width: 200,
-          decoration: BoxDecoration(
-            color: primaryColor.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: const Center(
-            child: Text(
-              'Item 1',
-              style: TextStyle(fontSize: 18, color: Colors.white),
+      itemCount: itemsMenu.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: Container(
+            width: 200,
+            decoration: BoxDecoration(
+              color: primaryColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
             ),
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Container(
-          width: 200,
-          decoration: BoxDecoration(
-            color: primaryColor.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: const Center(
-            child: Text(
-              'Item 2',
-              style: TextStyle(fontSize: 18, color: Colors.white),
-            ),
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Container(
-          width: 200,
-          decoration: BoxDecoration(
-            color: primaryColor.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: const Center(
-            child: Text(
-              'Item 3',
-              style: TextStyle(fontSize: 18, color: Colors.white),
-            ),
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Container(
-          width: 200,
-          decoration: BoxDecoration(
-            color: primaryColor.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: const Center(
+            child: Center(
               child: Text(
-            'Item 4',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          )),
-        ),
-      ],
+                itemsMenu[index],
+                style: TextStyle(fontSize: 18, color: Colors.grey),
+              ),
+            ),
+          ),
+        );
+      },
     ),
   );
 }

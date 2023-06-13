@@ -9,9 +9,13 @@ const Color textColor = Color(0xFF40414F);
 const Color white = Colors.white;
 const Color bgColor = Color.fromARGB(96, 216, 216, 216);
 const Color menuColor = Colors.indigo;
+const Color bgScreen = Color(0xFFEDF1D6);
 
 double defaultMargin = 16.0;
 double avatarSize = 80.0;
 double fontSize = 18.0;
 
 BorderRadius borderRadius = BorderRadius.circular(100);
+
+// local address
+const String localAddress = "192.168.0.12";
