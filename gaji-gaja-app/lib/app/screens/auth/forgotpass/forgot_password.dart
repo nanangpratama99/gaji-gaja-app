@@ -3,8 +3,6 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_ubah/app/screens/auth/forgotpass/reset_page.dart';
 
-import '../../../color/constant.dart';
-
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
 
@@ -13,6 +11,8 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  get primaryColor => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
