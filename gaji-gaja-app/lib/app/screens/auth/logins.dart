@@ -3,13 +3,15 @@ import 'dart:convert';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../color/constant.dart';
+import '../../constrant/constant.dart';
 import '../../cubits/cubit/login_cubit.dart';
 import 'forgotpass/forgot_password.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 import 'package:http/http.dart' as http;
+
+var dataUser;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -32,20 +34,23 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isVisible = false;
 
   Future<http.Response> postData(Map<String, String> data) async {
+    print(data);
     final response =
-        await http.post(Uri.parse("http://localhost:8081/user/loginV2"),
+        await http.post(Uri.parse("http://192.168.0.12:8081/user/loginV2"),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
             body: jsonEncode(data));
 
     final response2 =
-        await http.post(Uri.parse("http://localhost:8081/user/findEmail"),
+        await http.post(Uri.parse("http://192.168.0.12:8081/user/findEmail"),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
             body: jsonEncode(data));
     code = response.statusCode;
+
+    dataUser = response2.body;
     try {
       print(response2.body);
       print(jsonDecode(response2.body)['roleId']);

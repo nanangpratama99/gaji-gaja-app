@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../color/constant.dart';
+import '../../../constrant/constant.dart';
 
 class ResetPage extends StatefulWidget {
   const ResetPage({super.key});
@@ -170,7 +170,7 @@ class _ResetPageState extends State<ResetPage> {
                                 ),
                               ),
 
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               GestureDetector(
@@ -179,7 +179,7 @@ class _ResetPageState extends State<ResetPage> {
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
+                                  children: const [
                                     Icon(
                                       Icons.arrow_back,
                                       color: Colors.grey,

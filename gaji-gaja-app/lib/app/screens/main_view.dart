@@ -4,8 +4,8 @@ import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 import '../pages/page_dua.dart';
-import '../pages/profile_page.dart';
-import '../pages/home_page.dart';
+import 'home/home_page.dart';
+import 'profile/profile_page.dart';
 import '../pages/page_tiga.dart';
 
 class MainView extends StatefulWidget {
@@ -19,10 +19,10 @@ class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
     // Add your pages here
-    const PageSatu(),
+    const HomeScreen(),
     const PageDua(),
     const PageTiga(),
-    const PageEmpat(),
+    const ProfileScreen(),
   ];
 
   // list menu button
@@ -43,13 +43,16 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
+      // extendBody: true,
       body: Center(child: _pages[_selectedIndex]),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
+          // color: Color(0xFF014DAC),
+          color: Colors.white,
+
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12.0), // adjust to your liking
-            topRight: Radius.circular(12.0), // adjust to your liking
+            topLeft: Radius.circular(40.0), // adjust to your liking
+            topRight: Radius.circular(40.0), // adjust to your liking
           ),
           // color: Color(0xFF06306F), // put the color here
         ),
