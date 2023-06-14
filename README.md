@@ -13,6 +13,7 @@
 'if an changes or commit from other contributor make sure'
 > git pull origin main
 
+'Push in your new branch'
 > git push --set-upstream origin [new_branch]
 ~~~
 
