@@ -10,7 +10,7 @@
 > git add .
 > git commit -m "[comment]"
 
-'if an change or commit from other contributor make sure'
+'if an changes or commit from other contributor make sure'
 > git pull origin main
 
 > git push --set-upstream origin [new_branch]
