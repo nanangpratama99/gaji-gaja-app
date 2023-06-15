@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:tugas_ubah/app/constrant/constant.dart';
 
-import '../auth/logins.dart';
+import '../auth/logins_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

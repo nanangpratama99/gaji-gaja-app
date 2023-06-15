@@ -4,6 +4,7 @@ import 'dart:core';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tugas_ubah/app/screens/auth/register.dart';
 import '../../constrant/constant.dart';
 import '../../cubits/cubit/login_cubit.dart';
 import 'forgotpass/forgot_password.dart';
@@ -14,14 +15,14 @@ import 'package:http/http.dart' as http;
 
 var dataUser;
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginPinScreen extends StatefulWidget {
+  const LoginPinScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginPinScreen> createState() => _LoginPinScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginPinScreenState extends State<LoginPinScreen> {
 // controller
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -119,10 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             controller: _emailController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your email';
+                                return 'Please enter your username';
                               }
                               if (!EmailValidator.validate(value)) {
-                                return 'Please Enter Right Email';
+                                return 'Please Enter Right Username';
                               }
 
                               return null;
@@ -138,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.grey),
                               ),
-                              hintText: " Email",
+                              hintText: " Username",
                               hintStyle: GoogleFonts.poppins(
                                   fontSize: 16, color: Colors.grey),
                               prefixIcon: const Icon(
@@ -152,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             controller: _passwordController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your password';
+                                return 'Please enter your PIN';
                               }
                               return null;
                             },
@@ -165,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               fillColor: Colors.transparent,
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.never,
-                              labelText: ' Password',
+                              labelText: ' PIN',
                               filled: true,
                               isDense: true,
                               enabledBorder: OutlineInputBorder(
@@ -176,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.grey),
                               ),
-                              hintText: " Password",
+                              hintText: " Pin",
                               labelStyle:
                                   GoogleFonts.poppins(color: Colors.grey),
                               hintStyle: GoogleFonts.poppins(
@@ -226,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               ForgotPassword()));
                                 },
                                 child: Text(
-                                  "Forgot password",
+                                  "Forgot pin",
                                   style: GoogleFonts.poppins(
                                       fontSize: 13, color: Colors.orange),
                                 ),
@@ -250,21 +251,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return Center(
-                                          child: CircularProgressIndicator());
-                                    },
-                                  );
+                                  await CircularProgressIndicator();
+
                                   print(_emailController.text);
+
                                   await postData(
                                     {
                                       "email": _emailController.text,
                                       "password": _passwordController.text,
                                     },
                                   ).then((value) => {
-                                        Navigator.pop(context),
+                                        if (Navigator.canPop(context))
+                                          {
+                                            Navigator.pop(context),
+                                          },
                                         if (code == 500)
                                           {
                                             ScaffoldMessenger.of(context)
@@ -281,7 +281,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         else
                                           {context.read<LoginCubit>().login(1)}
                                       });
+
+                                  if (Navigator.canPop(context)) {
+                                    Navigator.pop(context);
+                                  }
                                 }
+
                                 ;
                               },
                               child: Text(
@@ -294,6 +299,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           sizedBoxH20,
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("Back"))
                         ],
                       ),
                     ),

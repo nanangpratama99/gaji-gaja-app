@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:http/http.dart' as http;
 import 'package:tugas_ubah/app/screens/profile/edit_profile.dart';
-import 'package:tugas_ubah/app/screens/auth/logins.dart';
+import 'package:tugas_ubah/app/screens/auth/logins_screen.dart';
 
 import '../../constrant/constant.dart';
 import '../../cubits/cubit/login_cubit.dart';

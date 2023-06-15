@@ -34,7 +34,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             ),
             // FORM LOGIN
             // --------------
-
             Center(
               child: SingleChildScrollView(
                 child: Container(
@@ -51,144 +50,24 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Forgot",
-                          style: TextStyle(
-                              fontSize: 35,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black54),
-                        ),
-                        const Text(
-                          "Password",
-                          style: TextStyle(
-                              fontSize: 35,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black54),
-                        ),
+                        _title("Forgot"),
+                        _title("PIN"),
                         sizedBoxH10,
-                        const Text(
-                          "dont worry, please enter your Email for reset your password",
-                          style: TextStyle(fontSize: 12, color: Colors.black45),
-                        ),
+                        _subTitle(
+                            "dont worry, please enter Company Email for reset your PIN"),
                         sizedBoxH30,
                         Form(
                           child: Column(
                             children: [
-                              // LOGO
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      style: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 45, 45, 45)),
-                                      decoration: InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          borderSide: const BorderSide(
-                                              width: 1, color: Colors.grey),
-                                        ),
-                                        focusedBorder: const OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.grey),
-                                        ),
-                                        hintText: " Email",
-                                        hintStyle: GoogleFonts.poppins(
-                                            fontSize: 16, color: Colors.grey),
-                                        prefixIcon: const Icon(
-                                          IconlyBold.message,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  sizedBoxH15,
-                                  SizedBox(
-                                    height: 60,
-                                    width: 60,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        primary: Color(0xFF014DAC),
-                                      ),
-                                      child: const Icon(
-                                        Icons.arrow_forward,
-                                        size: 30,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              // ==========
+                              _pinTextField("PIN", IconlyBold.message,
+                                  IconlyLight.arrowRight),
                               sizedBoxH20,
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    "Enter your OTP Code",
-                                    style: TextStyle(color: Colors.black54),
-                                  ),
-                                ],
-                              ),
+                              _title2(),
                               sizedBoxH10,
-                              TextFormField(
-                                style: const TextStyle(
-                                    color: Color.fromARGB(255, 45, 45, 45)),
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide: const BorderSide(
-                                        width: 1, color: Colors.grey),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey),
-                                  ),
-                                  hintText: " Enter OTP",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontSize: 16, color: Colors.grey),
-                                  prefixIcon: const Icon(
-                                    IconlyBold.message,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-
+                              _otpTextField("Enter OTP", IconlyBold.lock),
                               sizedBoxH40,
-                              // SIGN IN BUTTON
-                              SizedBox(
-                                height: 60,
-                                width: MediaQuery.of(context).size.width,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ResetPage()));
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          30), // Radius sudut tombol
-                                    ),
-                                    primary: Color(
-                                        0xFF014DAC), // Warna latar belakang tombol
-                                  ),
-                                  child: Text(
-                                    'Verify OTP',
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 17,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ),
-
+                              // OTP BUTTON
+                              _buttonOtp(context),
                               sizedBoxH20,
                               GestureDetector(
                                 onTap: () {
@@ -218,6 +97,134 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  // widget
+
+  // title widget
+  Widget _title(String textTitle) {
+    return Text(
+      textTitle,
+      style: const TextStyle(
+          fontSize: 35, fontWeight: FontWeight.w600, color: Colors.black54),
+    );
+  }
+
+  // subtitle widget
+  Widget _subTitle(String subText) {
+    return Text(
+      subText,
+      style: TextStyle(fontSize: 12, color: Colors.black45),
+    );
+  }
+
+  // pin textfield widget
+  Widget _pinTextField(String hint, IconData icon, IconData icon2) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            style: const TextStyle(color: Color.fromARGB(255, 45, 45, 45)),
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide: const BorderSide(width: 1, color: Colors.grey),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              hintText: hint,
+              hintStyle: GoogleFonts.poppins(fontSize: 16, color: Colors.grey),
+              prefixIcon: Icon(
+                icon,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        SizedBox(
+          height: 60,
+          width: 60,
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+              primary: Color(0xFF014DAC),
+            ),
+            child: Icon(
+              icon2,
+              size: 30,
+              color: Colors.white,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+// otp title
+  Widget _title2() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        Text(
+          "Enter your OTP Code",
+          style: TextStyle(color: Colors.black54),
+        ),
+      ],
+    );
+  }
+
+  // otp textfield widget
+  Widget _otpTextField(String hint, IconData icon) {
+    return TextFormField(
+      style: const TextStyle(color: Color.fromARGB(255, 45, 45, 45)),
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: const BorderSide(width: 1, color: Colors.grey),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        hintText: hint,
+        hintStyle: GoogleFonts.poppins(fontSize: 16, color: Colors.grey),
+        prefixIcon: Icon(
+          icon,
+          color: Colors.grey,
+        ),
+      ),
+    );
+  }
+
+  // button otp widget
+  Widget _buttonOtp(context) {
+    return SizedBox(
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => ResetPage()));
+        },
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30), // Radius sudut tombol
+          ),
+          primary: Color(0xFF014DAC), // Warna latar belakang tombol
+        ),
+        child: Text(
+          'Verify OTP',
+          style: GoogleFonts.poppins(
+              fontSize: 17, color: Colors.white, fontWeight: FontWeight.w600),
         ),
       ),
     );
