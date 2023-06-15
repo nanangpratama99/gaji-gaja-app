@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tugas_ubah/app/screens/auth/login_view.dart';
 
 import '../cubits/cubit/login_cubit.dart';
-import '../screens/auth/logins.dart';
+import '../screens/auth/logins_screen.dart';
 import '../screens/main_view.dart';
 
 class AppRouter {
@@ -19,7 +20,7 @@ class AppRouter {
           path: '/login',
           name: 'login',
           builder: (BuildContext context, GoRouterState state) {
-            return const LoginScreen();
+            return const LoginView();
           },
         ),
 

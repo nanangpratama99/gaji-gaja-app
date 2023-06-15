@@ -28,4 +28,4 @@ const SizedBox sizedBoxH30 = SizedBox(height: 30);
 const SizedBox sizedBoxH40 = SizedBox(height: 40);
 
 // local address
-const String localAddress = "172.22.0.1";
+const String localAddress = "192.168.0.12";

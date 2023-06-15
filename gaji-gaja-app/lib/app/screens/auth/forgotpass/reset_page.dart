@@ -19,10 +19,9 @@ class _ResetPageState extends State<ResetPage> {
   // ===
   Map<String, String> data = {
     'title': 'Reset',
-    'title2': 'Password',
-    'description':
-        'dont worry, please enter new password for reset your password',
-    'subTitle': 'Cahange Pssword',
+    'title2': 'PIN',
+    'description': 'dont worry, please enter new Pin for reset your Pin',
+    'subTitle': 'Change Pin',
   };
 
   @override
@@ -97,116 +96,14 @@ class _ResetPageState extends State<ResetPage> {
                                 ],
                               ),
                               sizedBoxH10,
-                              TextFormField(
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter new password';
-                                  }
-                                  return null;
-                                },
-                                obscureText: _obscureText,
-                                keyboardType: TextInputType.visiblePassword,
-                                style: const TextStyle(
-                                    color: Color.fromARGB(255, 45, 45, 45)),
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide: const BorderSide(
-                                        width: 1, color: Colors.grey),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey),
-                                  ),
-                                  hintText: " Enter your new password",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontSize: 16, color: Colors.grey),
-                                  prefixIcon: const Icon(
-                                    IconlyBold.password,
-                                    color: Colors.grey,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(_obscureText
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscureText = !_obscureText;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
+                              _pinTextField(
+                                  "Enter your new PIN", IconlyBold.lock),
                               sizedBoxH20,
-                              TextFormField(
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter new password';
-                                  }
-                                  return null;
-                                },
-                                obscureText: _obscureText2,
-                                style: const TextStyle(
-                                    color: Color.fromARGB(255, 45, 45, 45)),
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide: const BorderSide(
-                                        width: 1, color: Colors.grey),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey),
-                                  ),
-                                  hintText: " Confirm your password",
-                                  hintStyle: GoogleFonts.poppins(
-                                      fontSize: 16, color: Colors.grey),
-                                  prefixIcon: const Icon(
-                                    IconlyBold.password,
-                                    color: Colors.grey,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(_obscureText2
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscureText2 = !_obscureText2;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-
+                              _confirmTextField(
+                                  "Confirm your PIN", IconlyBold.lock),
                               sizedBoxH40,
-                              // SIGN IN BUTTON
-                              Container(
-                                height: 60,
-                                width: MediaQuery.of(context).size.width,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ResetPage(),
-                                      ),
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          30), // Radius sudut tombol
-                                    ),
-                                    primary:
-                                        primaryColor, // Warna latar belakang tombol
-                                  ),
-                                  child: Text(
-                                    'Save',
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 17,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ),
+                              // save button
+                              _saveButton(context),
 
                               sizedBoxH20,
                               GestureDetector(
@@ -237,6 +134,114 @@ class _ResetPageState extends State<ResetPage> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  // widget
+
+  // enter pin widget
+  Widget _pinTextField(String hint, IconData icon) {
+    return TextFormField(
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter new password';
+        }
+        return null;
+      },
+      obscureText: _obscureText,
+      keyboardType: TextInputType.visiblePassword,
+      style: const TextStyle(color: Color.fromARGB(255, 45, 45, 45)),
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: const BorderSide(width: 1, color: Colors.grey),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        hintText: hint,
+        hintStyle: GoogleFonts.poppins(fontSize: 16, color: Colors.grey),
+        prefixIcon: Icon(
+          icon,
+          color: Colors.grey,
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+          onPressed: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  // confirm pin textfield
+  Widget _confirmTextField(String hint, IconData icon) {
+    return TextFormField(
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter new PIN';
+        }
+        return null;
+      },
+      obscureText: _obscureText2,
+      style: const TextStyle(color: Color.fromARGB(255, 45, 45, 45)),
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: const BorderSide(width: 1, color: Colors.grey),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        hintText: hint,
+        hintStyle: GoogleFonts.poppins(fontSize: 16, color: Colors.grey),
+        prefixIcon: Icon(
+          icon,
+          color: Colors.grey,
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(_obscureText2 ? Icons.visibility_off : Icons.visibility),
+          onPressed: () {
+            setState(
+              () {
+                _obscureText2 = !_obscureText2;
+              },
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  // save button widget
+  Widget _saveButton(context) {
+    return Container(
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ResetPage(),
+            ),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30), // Radius sudut tombol
+          ),
+          primary: primaryColor, // Warna latar belakang tombol
+        ),
+        child: Text(
+          'Save',
+          style: GoogleFonts.poppins(
+              fontSize: 17, color: Colors.white, fontWeight: FontWeight.w600),
         ),
       ),
     );
