@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:http/http.dart' as http;
+import 'package:tugas_ubah/app/screens/auth/login_pin.dart';
+import 'package:tugas_ubah/app/screens/profile/change_pin.dart';
 import 'package:tugas_ubah/app/screens/profile/edit_profile.dart';
-import 'package:tugas_ubah/app/screens/auth/logins_screen.dart';
+import 'package:tugas_ubah/app/screens/backap/logins_screen.dart';
 
 import '../../constrant/constant.dart';
 import '../../cubits/cubit/login_cubit.dart';
@@ -64,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 left: 10,
                               ),
                               child: Text(
-                                jsonDecode(dataUser)['name'] ?? "null",
+                                name.toString().toUpperCase(),
                                 style: TextStyle(
                                     color: Colors.amber,
                                     fontWeight: FontWeight.bold,
@@ -73,11 +75,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 10, top: 5),
-                              child: Text(
-                                jsonDecode(dataUser)['phone'] ?? "null",
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
-                              ),
+                              // child: Text(
+                              //   jsonDecode(dataUser)['phone'] ?? "null",
+                              //   style:
+                              //       TextStyle(fontSize: 12, color: Colors.grey),
+                              // ),
                             ),
                           ],
                         )
@@ -98,6 +100,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   );
                 },
                 text: 'Edit Profile',
+              ),
+              sizedBoxH10,
+              ListProfile(
+                icon: IconlyBold.lock,
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChangePinScreen(),
+                    ),
+                  );
+                },
+                text: 'Change Pin',
               ),
               sizedBoxH10,
               ListProfile(

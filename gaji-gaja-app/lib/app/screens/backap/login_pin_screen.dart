@@ -5,15 +5,17 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tugas_ubah/app/screens/auth/register.dart';
+import 'package:tugas_ubah/app/screens/profile/change_pin.dart';
 import '../../constrant/constant.dart';
 import '../../cubits/cubit/login_cubit.dart';
-import 'forgotpass/forgot_password.dart';
+import '../auth/forgotpass/forgot_password.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 import 'package:http/http.dart' as http;
 
 var dataUser;
+String? name;
 
 class LoginPinScreen extends StatefulWidget {
   const LoginPinScreen({Key? key}) : super(key: key);
@@ -34,6 +36,7 @@ class _LoginPinScreenState extends State<LoginPinScreen> {
   final textFieldFocusNode = FocusNode();
   int code = 0;
   bool _isVisible = false;
+  bool _isFirstLogin = true;
 
   Future<http.Response> postData(Map<String, String> data) async {
     print(data);
@@ -53,11 +56,18 @@ class _LoginPinScreenState extends State<LoginPinScreen> {
     code = response.statusCode;
 
     dataUser = response2.body;
+
     try {
       print(response2.body);
       print(jsonDecode(response2.body)['roleId']);
     } catch (e) {
       print(e);
+    }
+
+    if (jsonDecode(dataUser)['name'] == null) {
+      name = "Null";
+    } else {
+      name = (jsonDecode(dataUser)['name']);
     }
 
     return response;

@@ -224,14 +224,7 @@ class _ResetPageState extends State<ResetPage> {
       height: 60,
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ResetPage(),
-            ),
-          );
-        },
+        onPressed: () {},
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30), // Radius sudut tombol
