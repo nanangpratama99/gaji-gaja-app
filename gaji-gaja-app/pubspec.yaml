@@ -49,6 +49,7 @@ dependencies:
   art_sweetalert: ^0.0.5
   shared_preferences: ^2.1.2
   modal_bottom_sheet: ^2.1.2
+  pin_code_fields: ^7.4.0
   
 
 dev_dependencies:

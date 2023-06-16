@@ -93,7 +93,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           sizedBoxH25,
                           _pinTextField(),
                           sizedBoxH25,
-                          _configmTextField(),
+                          _confirmTextField(),
                           sizedBoxH40,
                           // SIGN IN BUTTON
                           _signUpButton(context),
@@ -110,7 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 const Spacer(),
                                 Text(
-                                  "Login Now",
+                                  "Login",
                                   style: GoogleFonts.poppins(
                                       color: Color.fromARGB(255, 82, 82, 82),
                                       fontSize: 10,
@@ -230,7 +230,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   // confirm pin widget
-  Widget _configmTextField() {
+  Widget _confirmTextField() {
     return TextFormField(
       keyboardType: TextInputType.visiblePassword,
       obscureText: _isVisibleConfirm,
@@ -298,7 +298,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Silahkan Login')),
+                const SnackBar(content: Text('Please Login')),
               );
             }
           }

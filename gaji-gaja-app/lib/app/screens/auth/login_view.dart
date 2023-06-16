@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_ubah/app/constrant/constant.dart';
-import 'package:tugas_ubah/app/screens/auth/logins_screen.dart';
+import 'package:tugas_ubah/app/screens/backap/logins_screen.dart';
 import 'package:tugas_ubah/app/screens/auth/register.dart';
 
-import 'login_pin_screen.dart';
+import 'login_pin.dart';
+import '../backap/login_pin_screen.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -17,7 +18,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: SafeArea(
@@ -25,7 +26,7 @@ class _LoginViewState extends State<LoginView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Welcome",
                 style: TextStyle(
                     fontSize: 30,
@@ -53,71 +54,38 @@ class _LoginViewState extends State<LoginView> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
       width: MediaQuery.of(context).size.width,
-      height: 55,
+      height: 60,
       child: ElevatedButton(
         onPressed: () {
           showModalBottomSheet(
+            isScrollControlled: true,
             context: context,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(40.0), // Set the top border radius
               ),
             ),
             builder: (BuildContext context) {
               return Container(
-                height: MediaQuery.of(context).size.height / 3,
-                decoration: BoxDecoration(
+                height: MediaQuery.of(context).size.height / 1.5,
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(20.0), // Set the top border radius
                   ),
                 ),
                 child: Column(
                   children: [
-                    // using pin
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginPinScreen())),
-                      child: Container(
-                        margin: EdgeInsets.only(top: 50, left: 40, right: 40),
-                        height: 60,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Using PIN",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
+                    Container(
+                      margin: EdgeInsets.only(top: 5, bottom: 40),
+                      height: 7,
+                      width: 100,
+                      decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(10)),
                     ),
 
-                    // using password
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen())),
-                      child: Container(
-                        margin: EdgeInsets.only(top: 40, left: 40, right: 40),
-                        height: 60,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Using Password",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // LOGIN FORM USIGN PIN
+                    const LoginScreenUsingPin(),
                   ],
                 ),
               );
@@ -148,10 +116,14 @@ class _LoginViewState extends State<LoginView> {
         horizontal: 40,
       ),
       width: MediaQuery.of(context).size.width,
-      height: 55,
+      height: 60,
       child: ElevatedButton(
         onPressed: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => RegisterScreen())),
+          context,
+          MaterialPageRoute(
+            builder: (context) => RegisterScreen(),
+          ),
+        ),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(

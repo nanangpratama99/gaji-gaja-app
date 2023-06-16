@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:tugas_ubah/app/screens/auth/login_view.dart';
 
 import '../cubits/cubit/login_cubit.dart';
-import '../screens/auth/logins_screen.dart';
 import '../screens/main_view.dart';
 
 class AppRouter {

@@ -4,9 +4,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_ubah/app/constrant/constant.dart';
+import 'package:tugas_ubah/app/screens/auth/login_pin.dart';
 
-import '../auth/logins_screen.dart';
+import '../backap/logins_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -60,9 +62,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           sizedBoxH3,
                           Text(
-                            jsonDecode(dataUser)['name'] ?? "null",
-                            style: TextStyle(color: Colors.white, fontSize: 25),
+                            name.toString().toUpperCase(),
+                            style: GoogleFonts.poppins(
+                                fontSize: 30, color: Colors.white),
                           ),
+                          // Text(
+                          //   jsonDecode(dataUser)['name'] ?? "null",
+                          //   style: TextStyle(color: Colors.white, fontSize: 30),
+                          // ),
                         ],
                       ),
                       IconButton(

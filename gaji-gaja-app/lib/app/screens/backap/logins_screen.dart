@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tugas_ubah/app/screens/auth/register.dart';
 import '../../constrant/constant.dart';
 import '../../cubits/cubit/login_cubit.dart';
-import 'forgotpass/forgot_password.dart';
+import '../auth/forgotpass/forgot_password.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
@@ -260,27 +260,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                       "email": _emailController.text,
                                       "password": _passwordController.text,
                                     },
-                                  ).then((value) => {
-                                        if (Navigator.canPop(context))
-                                          {
-                                            Navigator.pop(context),
-                                          },
-                                        if (code == 500)
-                                          {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                  backgroundColor: Colors.red,
-                                                  content: Text(
-                                                    'Email / Password Salah',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )),
-                                            )
-                                          }
-                                        else
-                                          {context.read<LoginCubit>().login(1)}
-                                      });
+                                  ).then(
+                                    (value) => {
+                                      if (Navigator.canPop(context))
+                                        {
+                                          Navigator.pop(context),
+                                        },
+                                      if (code == 500)
+                                        {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              backgroundColor: Colors.red,
+                                              content: Text(
+                                                'Email / Password Salah',
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          )
+                                        }
+                                      else
+                                        {context.read<LoginCubit>().login(1)}
+                                    },
+                                  );
 
                                   if (Navigator.canPop(context)) {
                                     Navigator.pop(context);
@@ -300,46 +303,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           sizedBoxH20,
                           TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text("Back"))
-                          // SizedBox(
-                          //   width: MediaQuery.of(context).size.width,
-                          //   child: Row(
-                          //     children: [
-                          //       Text(
-                          //         "Don't have an account",
-                          //         style: GoogleFonts.poppins(
-                          //             fontSize: 10,
-                          //             color: Color.fromARGB(255, 82, 82, 82)),
-                          //       ),
-                          //       const Spacer(),
-                          //       Text(
-                          //         "Register Now",
-                          //         style: GoogleFonts.poppins(
-                          //             color: Color.fromARGB(255, 82, 82, 82),
-                          //             fontSize: 10,
-                          //             fontWeight: FontWeight.w600),
-                          //       ),
-                          //       IconButton(
-                          //         icon: const Icon(
-                          //           Icons.arrow_forward,
-                          //           color: Color.fromARGB(255, 82, 82, 82),
-                          //           size: 23,
-                          //         ),
-                          //         onPressed: () {
-                          //           Navigator.push(
-                          //             context,
-                          //             MaterialPageRoute(
-                          //               builder: (context) => RegisterScreen(),
-                          //             ),
-                          //           );
-                          //         },
-                          //       )
-                          //     ],
-                          //   ),
-                          // )
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("Back"),
+                          )
                         ],
                       ),
                     ),
