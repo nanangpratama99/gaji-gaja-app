@@ -130,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ListProfile(
                 icon: IconlyBold.logout,
                 onPress: () {
-                  context.read<LoginCubit>().logout();
+                  context.read<LoginCubit>().logout(1);
                 },
                 text: 'Keluar',
               ),
