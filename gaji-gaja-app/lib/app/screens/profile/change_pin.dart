@@ -1,9 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:tugas_ubah/app/constrant/constant.dart';
+import 'package:http/http.dart' as http;
+
+import '../../cubits/cubit/login_cubit.dart';
+import '../auth/login_pin.dart';
 
 class ChangePinScreen extends StatefulWidget {
   const ChangePinScreen({super.key});
@@ -16,6 +23,24 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
   final TextEditingController _pinController = TextEditingController();
   // login func
   final _formKey = GlobalKey<FormState>();
+
+  Future<http.Response> updatePin(Map<String, String> data) async {
+    print(data);
+    final response = await http.post(
+      Uri.parse("http://$localAddress:8081/user/save"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(test),
+    );
+
+    // print(jsonDecode(dataUser)['pin']);
+
+    return response;
+  }
+
+  var test = jsonDecode(dataUser);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +75,12 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 50),
                   child: PinCodeTextField(
                     controller: _pinController,
+                    validator: (value) {
+                      if (value == null || value == "") {
+                        print("empty");
+                      }
+                      return null;
+                    },
                     length: 6,
                     obscureText: false,
                     animationType: AnimationType.fade,
@@ -66,6 +97,9 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
                     enableActiveFill: true,
                     onCompleted: (v) {
                       print("Completed");
+                      test['pin'] = v;
+                      print(test['pin']);
+                      print(test);
                     },
                     onChanged: (value) {},
                     beforeTextPaste: (text) {
@@ -94,7 +128,19 @@ class _ChangePinScreenState extends State<ChangePinScreen> {
                     ),
                     primary: primaryColor, // Warna latar belakang tombol
                   ),
-                  onPressed: () async {},
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      CircularProgressIndicator();
+                      print(_pinController.text);
+                      print(test);
+
+                      var response = await updatePin(
+                        {
+                          "pin": _pinController.text,
+                        },
+                      );
+                    }
+                  },
                   child: Text(
                     'Save',
                     style: GoogleFonts.poppins(

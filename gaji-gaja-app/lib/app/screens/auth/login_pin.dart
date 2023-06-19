@@ -7,12 +7,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:tugas_ubah/app/screens/auth/login_password.dart';
+import 'package:tugas_ubah/app/screens/home/home_page.dart';
+import 'package:tugas_ubah/app/screens/profile/change_pin.dart';
 
 import '../../constrant/constant.dart';
 import '../../cubits/cubit/login_cubit.dart';
 import 'forgotpass/forgot_password.dart';
 
+// ignore: prefer_typing_uninitialized_variables
 var dataUser;
 String? name;
 
@@ -35,28 +39,26 @@ class _LoginScreenUsingPinState extends State<LoginScreenUsingPin> {
   final textFieldFocusNode = FocusNode();
   int code = 0;
   bool _isVisible = false;
-  bool _isFirstLogin = true;
 
   Future<http.Response> postData(Map<String, String> data) async {
     print(data);
-    final response =
-        await http.post(Uri.parse("http://$localAddress:8081/user/loginV2"),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(data));
+    final response = await http.post(
+      Uri.parse("http://$localAddress:8081/user/loginV2"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(data),
+    );
 
-    final response2 =
-        await http.post(Uri.parse("http://$localAddress:8081/user/findEmail"),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(data));
+    final response2 = await http.post(
+      Uri.parse("http://$localAddress:8081/user/findEmail"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(data),
+    );
     code = response.statusCode;
-
     dataUser = response2.body;
-
-    var last = jsonDecode(response2.body)['roleId'];
 
     try {
       print(response2.body);
@@ -64,7 +66,6 @@ class _LoginScreenUsingPinState extends State<LoginScreenUsingPin> {
     } catch (e) {
       print(e);
     }
-
     if (jsonDecode(dataUser)['name'] == null) {
       name = "Null";
     } else {
@@ -243,43 +244,85 @@ class _LoginScreenUsingPinState extends State<LoginScreenUsingPin> {
                         ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            await CircularProgressIndicator();
-
+                            CircularProgressIndicator();
                             print(_emailController.text);
 
-                            await postData(
-                              {
-                                "email": _emailController.text,
-                                "password": _passwordController.text,
-                              },
-                            ).then((value) => {
-                                  if (Navigator.canPop(context))
-                                    {
-                                      Navigator.pop(context),
-                                    },
-                                  if (code == 500)
-                                    {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                            backgroundColor: Colors.red,
-                                            content: Text(
-                                              'Email / Password Salah',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            )),
-                                      )
-                                    }
-                                  else
-                                    {context.read<LoginCubit>().login(1)}
-                                });
+                            var response = await postData({
+                              "email": _emailController.text,
+                              "password": _passwordController.text,
+                            });
 
                             if (Navigator.canPop(context)) {
                               Navigator.pop(context);
                             }
-                          }
+                            print(response.statusCode);
 
-                          ;
+                            if (response.statusCode == 404) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text(
+                                    'Email / Pin Salah',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            } else if (response.statusCode == 500) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text(
+                                    'User tidak ditemukan',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            } else {
+                              if (jsonDecode(dataUser)['last'] == null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChangePinScreen(),
+                                  ),
+                                );
+                              } else {
+                                context.read<LoginCubit>().login(1);
+                              }
+                            }
+
+                            // if (jsonDecode(dataUser)['last'] == null) {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => ChangePinScreen(),
+                            //     ),
+                            //   );
+                            // } else {
+                            //   if (response.statusCode == 404) {
+                            //     ScaffoldMessenger.of(context).showSnackBar(
+                            //       const SnackBar(
+                            //         backgroundColor: Colors.red,
+                            //         content: Text(
+                            //           'Email / Pin Salah',
+                            //           style: TextStyle(color: Colors.white),
+                            //         ),
+                            //       ),
+                            //     );
+                            //   } else if (response.statusCode == 500) {
+                            //     ScaffoldMessenger.of(context).showSnackBar(
+                            //       const SnackBar(
+                            //         backgroundColor: Colors.red,
+                            //         content: Text(
+                            //           'User tidak ditemukan',
+                            //           style: TextStyle(color: Colors.white),
+                            //         ),
+                            //       ),
+                            //     );
+                            //   } else {
+                            //     context.read<LoginCubit>().login(1);
+                            //   }
+                            // }
+                          }
                         },
                         child: Text(
                           'Login',

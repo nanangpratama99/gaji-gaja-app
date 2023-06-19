@@ -15,7 +15,7 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  void logout() {
+  void logout(int i) {
     emit(const LoginState.unauthenticated());
   }
 }
