@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:tugas_ubah/app/screens/loan/loan_view.dart';
 
-import '../pages/page_dua.dart';
 import 'home/home_page.dart';
 import 'profile/profile_page.dart';
 import '../pages/page_tiga.dart';
@@ -20,13 +20,18 @@ class _MainViewState extends State<MainView> {
   final List<Widget> _pages = [
     // Add your pages here
     const HomeScreen(),
-    const PageDua(),
+    const LoanView(),
     const PageTiga(),
     const ProfileScreen(),
   ];
 
   // list menu button
-  List<String> menuItems = ["Home", "Analytic", "Wallet", "Person"];
+  List<String> menuItems = [
+    "Home",
+    "Loan",
+    "Salary",
+    "Person",
+  ];
   List<IconData> iconItems = [
     IconlyLight.home,
     IconlyLight.activity,

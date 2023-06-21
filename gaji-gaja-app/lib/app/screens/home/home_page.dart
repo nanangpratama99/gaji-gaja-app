@@ -7,6 +7,8 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_ubah/app/constrant/constant.dart';
 import 'package:tugas_ubah/app/screens/auth/login_pin.dart';
+import 'package:tugas_ubah/app/screens/loan/loan_screens.dart';
+import 'package:tugas_ubah/app/screens/loan/loan_view.dart';
 
 import '../backap/logins_screen.dart';
 
@@ -66,10 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: GoogleFonts.poppins(
                                 fontSize: 30, color: Colors.white),
                           ),
-                          // Text(
-                          //   jsonDecode(dataUser)['name'] ?? "null",
-                          //   style: TextStyle(color: Colors.white, fontSize: 30),
-                          // ),
                         ],
                       ),
                       IconButton(
@@ -88,28 +86,16 @@ class _HomeScreenState extends State<HomeScreen> {
             // content
             Positioned(
               top: 170,
+              bottom: 10,
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                // decoration: BoxDecoration(
-                //     color: Colors.white,
-                //     borderRadius: const BorderRadius.only(
-                //       topLeft: Radius.circular(30),
-                //       topRight: Radius.circular(30),
-                //     ),
-                //     boxShadow: [
-                //       BoxShadow(
-                //         color: Colors.grey.shade600,
-                //         spreadRadius: 1,
-                //         blurRadius: 20,
-                //         offset: const Offset(5, 10),
-                //       )
-                //     ]),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       _listMenu(),
-                      _mainCard(context),
+                      _salaryCard(context),
+                      _loanCard(context),
                     ],
                   ),
                 ),
@@ -131,77 +117,186 @@ Widget _cards(context) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _mainCard(context),
+        _salaryCard(context),
       ],
     ),
   );
 }
 
-Widget _mainCard(context) {
+Widget _salaryCard(context) {
   return Container(
-    margin: EdgeInsets.only(top: 20),
-    width: MediaQuery.of(context).size.width / 1.1,
-    padding: EdgeInsets.all(5),
-    height: 250,
-    decoration: BoxDecoration(
-      color: Colors.blue,
-      borderRadius: BorderRadius.circular(40),
+    margin: EdgeInsets.only(top: 20, bottom: 20),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "SALARY",
+          style: GoogleFonts.poppins(
+              fontSize: 20, fontWeight: FontWeight.w600, color: Colors.grey),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 10),
+          width: MediaQuery.of(context).size.width / 1.1,
+          padding: EdgeInsets.all(0),
+          height: 250,
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Available Salary",
+                      style: TextStyle(
+                          color: Colors.white38, fontWeight: FontWeight.w600),
+                    ),
+                    Container(
+                      width: 70,
+                      height: 70,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.20),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Image.asset(
+                        "asset/image/logo-white.png",
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Rp. 3.000.000",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 33,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "For this month",
+                      style: TextStyle(color: Colors.white54),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "Selengkapnya",
+                      style: TextStyle(color: Colors.white, letterSpacing: 1),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 5),
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.20),
+                          borderRadius: BorderRadius.circular(30)),
+                      child: const Icon(
+                        IconlyLight.arrowRight,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
     ),
-    child: Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  );
+}
+
+// loan card
+Widget _loanCard(context) {
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Available Loan",
+          style: GoogleFonts.poppins(
+              fontSize: 20, fontWeight: FontWeight.w600, color: Colors.grey),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(
+            vertical: 10,
+          ),
+          padding: EdgeInsets.all(15),
+          width: MediaQuery.of(context).size.width,
+          height: 80,
+          decoration: BoxDecoration(
+            color: Colors.orange[300],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
             children: [
-              const Text(
-                "Analityc",
-                style: TextStyle(
-                    color: Colors.white38, fontWeight: FontWeight.w600),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.payments_rounded,
+                    color: Colors.white60,
+                  ),
+                ],
               ),
-              Container(
-                width: 70,
-                height: 70,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.20),
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: Image.asset(
-                  "asset/image/logo-white.png",
-                  fit: BoxFit.cover,
-                ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                "2.500.000",
+                style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
+              ),
+              Spacer(),
+              Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white38,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoanScreen(),
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.arrow_right_alt_outlined,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                ],
               )
             ],
           ),
-          const Text(
-            "Rp. 3.000.000",
-            style: TextStyle(
-                color: Colors.white, fontSize: 33, fontWeight: FontWeight.w600),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Selengkapnya",
-                style: TextStyle(color: Colors.white, letterSpacing: 1),
-              ),
-              Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.20),
-                    borderRadius: BorderRadius.circular(30)),
-                child: const Icon(
-                  IconlyLight.arrowRight,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          )
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }
@@ -209,10 +304,16 @@ Widget _mainCard(context) {
 // list menu
 Widget _listMenu() {
   List<String> itemsMenu = [
-    "Item1",
+    "15 Days Worked",
     "Item2",
     "Item3",
     "Item4",
+  ];
+  List<IconData> iconMenu = [
+    Icons.date_range,
+    Icons.abc,
+    Icons.abc,
+    Icons.abc,
   ];
 
   return Container(
@@ -230,11 +331,55 @@ Widget _listMenu() {
               color: primaryColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(15),
             ),
-            child: Center(
-              child: Text(
-                itemsMenu[index],
-                style: TextStyle(fontSize: 18, color: Colors.grey),
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Icon(
+                    iconMenu[index],
+                    color: Colors.grey,
+                  ),
+                ),
+                const Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  // child: VerticalDivider(
+                  //   thickness: 2,
+                  // ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      itemsMenu[index],
+                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                    ),
+                    itemsMenu[index] == '15 Days Worked'
+                        ? Container(
+                            margin: EdgeInsets.only(top: 5),
+                            decoration: BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: EdgeInsets.all(3),
+                            child: Text(
+                              "This Month",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 12),
+                            ),
+                          )
+                        : Container()
+                  ],
+                )
+              ],
             ),
           ),
         );
