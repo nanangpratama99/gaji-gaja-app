@@ -3,7 +3,10 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_ubah/app/constrant/constant.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:tugas_ubah/app/screens/loan/loan_view.dart';
+import 'package:tugas_ubah/app/screens/loan/pay_debt_form.dart';
+import 'package:tugas_ubah/app/screens/loan/pay_loan_form.dart';
+import 'package:tugas_ubah/app/screens/loan/req_loan_form.dart';
+import 'package:tugas_ubah/app/screens/loan/tab_bar_loan.dart';
 
 class LoanScreen extends StatefulWidget {
   const LoanScreen({super.key});
@@ -18,23 +21,31 @@ class _LoanScreenState extends State<LoanScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          height: MediaQuery.of(context).size.height,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                Text(
-                  "My Loan",
-                  style:
-                      GoogleFonts.poppins(fontSize: 30, color: Colors.black54),
+                _tabBar(context),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "My Loan",
+                      style: GoogleFonts.poppins(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black54),
+                    ),
+                    Text(
+                      "Available loan",
+                      style: GoogleFonts.poppins(color: Colors.grey),
+                    ),
+                    _loan(context),
+                    // jumlah loan
+                    // _outstandingLoan(context),
+                  ],
                 ),
-                Text(
-                  "Available loan",
-                  style: GoogleFonts.poppins(color: Colors.grey),
-                ),
-                // jumlah loan
-                _loan(context),
-                _outstandingLoan(context),
               ],
             ),
           ),
@@ -50,7 +61,7 @@ class _LoanScreenState extends State<LoanScreen> {
       margin: EdgeInsets.only(top: 20),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: black1,
         borderRadius: BorderRadius.circular(40),
         boxShadow: [
           BoxShadow(
@@ -67,9 +78,7 @@ class _LoanScreenState extends State<LoanScreen> {
           Text(
             "2.500.000",
             style: GoogleFonts.poppins(
-                fontSize: 40,
-                fontWeight: FontWeight.w600,
-                color: Colors.black54),
+                fontSize: 40, fontWeight: FontWeight.w600, color: white),
           ),
           Text(
             "Avalilable loan you can witdraw",
@@ -88,7 +97,7 @@ class _LoanScreenState extends State<LoanScreen> {
                       borderRadius:
                           BorderRadius.circular(35), // Radius sudut tombol
                     ),
-                    primary: Colors.green, // Warna latar belakang tombol
+                    primary: green, // Warna latar belakang tombol
                   ),
                   onPressed: () {
                     showModalBottomSheet(
@@ -102,7 +111,7 @@ class _LoanScreenState extends State<LoanScreen> {
                       ),
                       builder: (BuildContext context) {
                         return Container(
-                          height: MediaQuery.of(context).size.height / 2,
+                          height: MediaQuery.of(context).size.height / 1.5,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(
@@ -121,7 +130,7 @@ class _LoanScreenState extends State<LoanScreen> {
                               ),
 
                               // LOGIN FORM USIGN PIN
-                              const LoanView(),
+                              const ReqLoanView(),
                             ],
                           ),
                         );
@@ -147,13 +156,12 @@ class _LoanScreenState extends State<LoanScreen> {
                       borderRadius:
                           BorderRadius.circular(45), // Radius sudut tombol
                     ),
-                    primary: Color.fromARGB(
-                        255, 230, 230, 230), // Warna latar belakang tombol
+                    primary: Colors.white54, // Warna latar belakang tombol
                   ),
                   onPressed: () async {},
                   child: Icon(
                     Icons.history_rounded,
-                    color: Colors.black45,
+                    color: Colors.white,
                     size: 30,
                   ),
                 ),
@@ -165,14 +173,15 @@ class _LoanScreenState extends State<LoanScreen> {
     );
   }
 
+// outstanding loan
   Widget _outstandingLoan(context) {
     return Container(
-      padding: EdgeInsets.all(30),
-      margin: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.all(25),
+      margin: EdgeInsets.only(top: 20, left: 10, right: 10),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(35),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),
@@ -185,60 +194,348 @@ class _LoanScreenState extends State<LoanScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Outstandi loan",
-            style: GoogleFonts.poppins(
-                color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          Text(
-            "The loan you need to pay soon",
-            style: GoogleFonts.poppins(color: Colors.grey),
-          ),
           sizedBoxH10,
           // button
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              DottedBorder(
-                borderType: BorderType.RRect,
-                radius: Radius.circular(10),
-                dashPattern: [10, 10],
-                color: Colors.grey,
-                strokeWidth: 2,
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                  child: Text(
-                    'Rp. 1000.000',
-                    style: GoogleFonts.poppins(
-                        fontSize: 25,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w600),
+              Column(
+                children: [
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Amount Loan",
+                          style: GoogleFonts.poppins(color: Colors.grey),
+                        ),
+                        Text(
+                          'Rp. 1000.000',
+                          style: GoogleFonts.poppins(
+                              fontSize: 25,
+                              color: black1,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        sizedBoxH10,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.date_range_rounded,
+                              color: Colors.grey,
+                              size: 25,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "doe date",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 11),
+                                    ),
+                                    Text(
+                                      "20/10/2023",
+                                      style: TextStyle(fontSize: 11),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
               Spacer(),
-              Container(
-                height: 60,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(45), // Radius sudut tombol
+              Column(
+                children: [
+                  Container(
+                    height: 60,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(45), // Radius sudut tombol
+                        ),
+                        primary: blue, // Warna latar belakang tombol
+                      ),
+                      onPressed: () {
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(
+                                  40.0), // Set the top border radius
+                            ),
+                          ),
+                          builder: (BuildContext context) {
+                            return Container(
+                              height: MediaQuery.of(context).size.height / 2,
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(
+                                      20.0), // Set the top border radius
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(top: 5, bottom: 40),
+                                    height: 7,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                  ),
+
+                                  // LOGIN FORM USIGN PIN
+                                  const PayLoanView(),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Text(
+                        "Pay Now",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                    primary: Color.fromARGB(
-                        255, 230, 230, 230), // Warna latar belakang tombol
                   ),
-                  onPressed: () async {},
-                  child: Icon(
-                    Icons.history_rounded,
-                    color: Colors.black45,
-                    size: 30,
-                  ),
-                ),
-              ),
+                ],
+              )
             ],
-          )
+          ),
         ],
+      ),
+    );
+  }
+
+  // outstanding debt
+  Widget _outstandingDebt(context) {
+    return Container(
+      padding: EdgeInsets.all(25),
+      margin: EdgeInsets.only(top: 20, left: 10, right: 10),
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(35),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          sizedBoxH10,
+          // button
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Amount Debt",
+                          style: GoogleFonts.poppins(color: Colors.grey),
+                        ),
+                        Text(
+                          'Rp. 1000.000',
+                          style: GoogleFonts.poppins(
+                              fontSize: 25,
+                              color: black1,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        sizedBoxH10,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.date_range_rounded,
+                              color: Colors.grey,
+                              size: 25,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "doe date",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 11),
+                                    ),
+                                    Text(
+                                      "20/10/2023",
+                                      style: TextStyle(fontSize: 11),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Spacer(),
+              Column(
+                children: [
+                  Container(
+                    height: 60,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(45), // Radius sudut tombol
+                        ),
+                        primary: orange, // Warna latar belakang tombol
+                      ),
+                      onPressed: () {
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(
+                                  40.0), // Set the top border radius
+                            ),
+                          ),
+                          builder: (BuildContext context) {
+                            return Container(
+                              height: MediaQuery.of(context).size.height / 2,
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(
+                                      20.0), // Set the top border radius
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(top: 5, bottom: 40),
+                                    height: 7,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                  ),
+
+                                  // LOGIN FORM USIGN PIN
+                                  const RePayLoan(),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Text(
+                        "Repay Loan",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // tabbar
+  Widget _tabBar(context) {
+    return Container(
+      margin: EdgeInsets.only(top: 320),
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: DefaultTabController(
+        length: 2,
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(35),
+                color: Colors.black.withOpacity(0.1),
+              ),
+              child: TabBar(
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.0),
+                  color: primaryColor,
+                ),
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.grey.shade900,
+                tabs: const [
+                  Tab(
+                    text: "Out. Loan",
+                  ),
+                  Tab(
+                    text: "Out. Debt",
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  // Konten untuk tab "Out. Loan"
+                  SingleChildScrollView(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          _outstandingLoan(context),
+                          _outstandingLoan(context),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // Konten untuk tab "Out. Debt"
+                  SingleChildScrollView(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          _outstandingDebt(context),
+                          _outstandingDebt(context),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

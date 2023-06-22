@@ -8,9 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_ubah/app/constrant/constant.dart';
 import 'package:tugas_ubah/app/screens/auth/login_pin.dart';
 import 'package:tugas_ubah/app/screens/loan/loan_screens.dart';
-import 'package:tugas_ubah/app/screens/loan/loan_view.dart';
 
+import '../salary/salary_screen.dart';
 import '../backap/logins_screen.dart';
+import '../loan/req_loan_form.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -140,8 +141,16 @@ Widget _salaryCard(context) {
           padding: EdgeInsets.all(0),
           height: 250,
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: blue,
             borderRadius: BorderRadius.circular(40),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                blurRadius: 10,
+                spreadRadius: 1,
+                offset: Offset(0, 3),
+              ),
+            ],
           ),
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -198,15 +207,23 @@ Widget _salaryCard(context) {
                       "Selengkapnya",
                       style: TextStyle(color: Colors.white, letterSpacing: 1),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 5),
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.20),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: const Icon(
-                        IconlyLight.arrowRight,
-                        color: Colors.white,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => SalaryScreen()),
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: 5),
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.20),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: const Icon(
+                          IconlyLight.arrowRight,
+                          color: Colors.white,
+                        ),
                       ),
                     )
                   ],
@@ -242,6 +259,14 @@ Widget _loanCard(context) {
           decoration: BoxDecoration(
             color: Colors.orange[300],
             borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                blurRadius: 10,
+                spreadRadius: 1,
+                offset: Offset(0, 3),
+              ),
+            ],
           ),
           child: Row(
             children: [
@@ -264,17 +289,7 @@ Widget _loanCard(context) {
               Spacer(),
               Row(
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.white38,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
-                  ),
+                  _addLoanButton(context),
                   SizedBox(
                     width: 10,
                   ),
@@ -297,6 +312,61 @@ Widget _loanCard(context) {
           ),
         ),
       ],
+    ),
+  );
+}
+
+// add loan Button,
+Widget _addLoanButton(context) {
+  return Container(
+    child: GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(40.0), // Set the top border radius
+            ),
+          ),
+          builder: (BuildContext context) {
+            return Container(
+              height: MediaQuery.of(context).size.height / 1.5,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20.0), // Set the top border radius
+                ),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 5, bottom: 40),
+                    height: 7,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+
+                  // LOGIN FORM USIGN PIN
+                  const ReqLoanView(),
+                ],
+              ),
+            );
+          },
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: Colors.white.withOpacity(0.5),
+        ),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
     ),
   );
 }

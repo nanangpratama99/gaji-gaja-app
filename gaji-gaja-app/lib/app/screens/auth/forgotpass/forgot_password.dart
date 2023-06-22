@@ -33,7 +33,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               ),
             ),
             // FORM LOGIN
-            // --------------
+            // ----------------------------------------
             Center(
               child: SingleChildScrollView(
                 child: Container(

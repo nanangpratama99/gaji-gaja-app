@@ -10,26 +10,25 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:tugas_ubah/app/screens/auth/login_password.dart';
-import 'package:tugas_ubah/app/screens/home/home_page.dart';
 import 'package:tugas_ubah/app/screens/profile/change_pin.dart';
 
 import '../../constrant/constant.dart';
 import '../../cubits/cubit/login_cubit.dart';
 
-class LoanView extends StatefulWidget {
-  const LoanView({super.key});
+class RePayLoan extends StatefulWidget {
+  const RePayLoan({super.key});
 
   @override
-  State<LoanView> createState() => _LoanViewState();
+  State<RePayLoan> createState() => _RePayLoanState();
 }
 
-class _LoanViewState extends State<LoanView> {
+class _RePayLoanState extends State<RePayLoan> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          "Reques Loan",
+          "Repay Loan",
           style: TextStyle(
               fontSize: 30, color: Colors.grey, fontWeight: FontWeight.w600),
         ),
@@ -64,6 +63,7 @@ class _LoanViewState extends State<LoanView> {
                         focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey),
                         ),
+                        label: Text("Nominal Loan"),
                         hintText: " Masukkan Nominal",
                         hintStyle: GoogleFonts.poppins(
                             fontSize: 16, color: Colors.grey),
@@ -75,19 +75,8 @@ class _LoanViewState extends State<LoanView> {
                         contentPadding: EdgeInsets.all(20),
                       ),
                     ),
-                    sizedBoxH10,
-                    Text("Jumlah loan : ..."),
                     sizedBoxH20,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _reqNominal(),
-                        _reqNominal(),
-                        _reqNominal(),
-                      ],
-                    ),
-                    sizedBoxH10,
-                    sizedBoxH25,
+
                     // SIGN IN BUTTON
                     // ------------------
                     Container(
@@ -103,7 +92,7 @@ class _LoanViewState extends State<LoanView> {
                         ),
                         onPressed: () async {},
                         child: Text(
-                          'Send',
+                          'Pay Now',
                           style: GoogleFonts.poppins(
                               fontSize: 17,
                               color: Colors.white,

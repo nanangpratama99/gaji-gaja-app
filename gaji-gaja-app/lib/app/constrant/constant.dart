@@ -12,6 +12,10 @@ const Color white = Colors.white;
 const Color bgColor = Color.fromARGB(96, 216, 216, 216);
 const Color menuColor = Colors.indigo;
 const Color bgScreen = Color(0xFFEDF1D6);
+const Color black1 = Color(0xFF001C30);
+const Color green = Colors.green;
+const Color blue = Colors.blue;
+const Color orange = Color.fromARGB(255, 255, 183, 77);
 
 double defaultMargin = 16.0;
 double avatarSize = 80.0;
