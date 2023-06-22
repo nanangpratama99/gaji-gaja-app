@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:email_validator/email_validator.dart';
@@ -7,9 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 import 'package:tugas_ubah/app/screens/auth/login_password.dart';
-import 'package:tugas_ubah/app/screens/home/home_page.dart';
 import 'package:tugas_ubah/app/screens/profile/change_pin.dart';
 
 import '../../constrant/constant.dart';
@@ -30,7 +29,7 @@ class LoginScreenUsingPin extends StatefulWidget {
 class _LoginScreenUsingPinState extends State<LoginScreenUsingPin> {
   // controller
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _pinController = TextEditingController();
 
 // login func
   final _formKey = GlobalKey<FormState>();
@@ -38,7 +37,8 @@ class _LoginScreenUsingPinState extends State<LoginScreenUsingPin> {
 // show / hide password
   final textFieldFocusNode = FocusNode();
   int code = 0;
-  bool _isVisible = false;
+  bool _isVisible = true;
+  bool _isLoading = false;
 
   Future<http.Response> postData(Map<String, String> data) async {
     print(data);
@@ -57,6 +57,10 @@ class _LoginScreenUsingPinState extends State<LoginScreenUsingPin> {
       },
       body: jsonEncode(data),
     );
+
+    print("Response");
+    print(response2.statusCode);
+
     code = response.statusCode;
     dataUser = response2.body;
 
@@ -77,13 +81,15 @@ class _LoginScreenUsingPinState extends State<LoginScreenUsingPin> {
 
   @override
   void _toggleVisible() {
-    setState(() {
-      _isVisible = !_isVisible;
-      if (textFieldFocusNode.hasPrimaryFocus)
-        return; // If focus is on text field, dont unfocus
-      textFieldFocusNode.canRequestFocus =
-          false; // Prevents focus if tap on eye
-    });
+    setState(
+      () {
+        _isVisible = !_isVisible;
+        if (textFieldFocusNode.hasPrimaryFocus)
+          return; // If focus is on text field, dont unfocus
+        textFieldFocusNode.canRequestFocus =
+            false; // Prevents focus if tap on eye
+      },
+    );
   }
 
   @override
@@ -147,7 +153,7 @@ class _LoginScreenUsingPinState extends State<LoginScreenUsingPin> {
                     ),
                     sizedBoxH25,
                     TextFormField(
-                      controller: _passwordController,
+                      controller: _pinController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your PIN';
@@ -244,84 +250,72 @@ class _LoginScreenUsingPinState extends State<LoginScreenUsingPin> {
                         ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            CircularProgressIndicator();
-                            print(_emailController.text);
-
-                            var response = await postData({
-                              "email": _emailController.text,
-                              "password": _passwordController.text,
+                            setState(() {
+                              _isLoading = true;
                             });
 
-                            if (Navigator.canPop(context)) {
-                              Navigator.pop(context);
-                            }
-                            print(response.statusCode);
+                            try {
+                              Timer(Duration(seconds: 5), () {
+                                print('Timer complete!');
+                              });
 
-                            if (response.statusCode == 404) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  backgroundColor: Colors.red,
-                                  content: Text(
-                                    'Email / Pin Salah',
-                                    style: TextStyle(color: Colors.white),
+                              // Show the circular progress indicator
+                              // showDialog(
+                              //   context: context,
+                              //   barrierDismissible: false,
+                              //   builder: (BuildContext context) {
+                              //     return Center(
+                              //       child: CircularProgressIndicator(),
+                              //     );
+                              //   },
+                              // );
+
+                              var response = await postData({
+                                "email": _emailController.text,
+                                "pin": _pinController.text,
+                              });
+
+                              // Hide the circular progress indicator
+                              Navigator.pop(context);
+
+                              print(response.statusCode);
+
+                              if (response.statusCode == 404) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content: Text(
+                                      'Email / Pin Salah',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ),
-                                ),
-                              );
-                            } else if (response.statusCode == 500) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  backgroundColor: Colors.red,
-                                  content: Text(
-                                    'User tidak ditemukan',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              );
-                            } else {
-                              if (jsonDecode(dataUser)['last'] == null) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ChangePinScreen(),
+                                );
+                              } else if (response.statusCode == 500) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content: Text(
+                                      'User tidak ditemukan',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                 );
                               } else {
-                                context.read<LoginCubit>().login(1);
+                                if (jsonDecode(dataUser)['update'] == null) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChangePinScreen(),
+                                    ),
+                                  );
+                                } else {
+                                  context.read<LoginCubit>().login(1);
+                                  // Navigator.pop(context);
+                                }
                               }
+                            } catch (e) {
+                              print(e);
                             }
-
-                            // if (jsonDecode(dataUser)['last'] == null) {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => ChangePinScreen(),
-                            //     ),
-                            //   );
-                            // } else {
-                            //   if (response.statusCode == 404) {
-                            //     ScaffoldMessenger.of(context).showSnackBar(
-                            //       const SnackBar(
-                            //         backgroundColor: Colors.red,
-                            //         content: Text(
-                            //           'Email / Pin Salah',
-                            //           style: TextStyle(color: Colors.white),
-                            //         ),
-                            //       ),
-                            //     );
-                            //   } else if (response.statusCode == 500) {
-                            //     ScaffoldMessenger.of(context).showSnackBar(
-                            //       const SnackBar(
-                            //         backgroundColor: Colors.red,
-                            //         content: Text(
-                            //           'User tidak ditemukan',
-                            //           style: TextStyle(color: Colors.white),
-                            //         ),
-                            //       ),
-                            //     );
-                            //   } else {
-                            //     context.read<LoginCubit>().login(1);
-                            //   }
-                            // }
                           }
                         },
                         child: Text(

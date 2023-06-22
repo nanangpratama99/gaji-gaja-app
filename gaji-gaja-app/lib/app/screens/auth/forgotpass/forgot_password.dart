@@ -33,7 +33,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               ),
             ),
             // FORM LOGIN
-            // --------------
+            // ----------------------------------------
             Center(
               child: SingleChildScrollView(
                 child: Container(
@@ -59,7 +59,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         Form(
                           child: Column(
                             children: [
-                              _pinTextField("PIN", IconlyBold.message,
+                              _pinTextField("Email Company", IconlyBold.message,
                                   IconlyLight.arrowRight),
                               sizedBoxH20,
                               _title2(),
