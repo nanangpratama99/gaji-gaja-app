@@ -46,8 +46,10 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // extendBody: true,
-      body: Center(child: _pages[_selectedIndex]),
+      extendBody: true,
+      body: Center(
+        child: _pages[_selectedIndex],
+      ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           color: Color(0xFF014DAC),
@@ -60,10 +62,10 @@ class _MainViewState extends State<MainView> {
           // color: Color(0xFF06306F), // put the color here
         ),
         child: Container(
-          margin: EdgeInsets.all(10),
+          // margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Color(0xFF014DAC),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(25),
           ),
           child: BottomNavigationBar(
             showUnselectedLabels: false,

@@ -516,6 +516,7 @@ class _LoanScreenState extends State<LoanScreen> {
                         children: [
                           _outstandingLoan(context),
                           _outstandingLoan(context),
+                          _outstandingLoan(context),
                         ],
                       ),
                     ),
@@ -525,6 +526,7 @@ class _LoanScreenState extends State<LoanScreen> {
                     child: Container(
                       child: Column(
                         children: [
+                          _outstandingDebt(context),
                           _outstandingDebt(context),
                           _outstandingDebt(context),
                         ],

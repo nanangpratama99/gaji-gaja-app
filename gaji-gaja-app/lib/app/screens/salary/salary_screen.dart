@@ -77,6 +77,13 @@ class _SalaryScreenState extends State<SalaryScreen> {
       decoration: BoxDecoration(
         color: primaryColor,
         borderRadius: BorderRadius.circular(40),
+        boxShadow: [
+          BoxShadow(
+              color: black1.withOpacity(0.2),
+              blurRadius: 45,
+              offset: Offset(0, 1),
+              spreadRadius: 0),
+        ],
       ),
     );
   }
@@ -85,30 +92,38 @@ class _SalaryScreenState extends State<SalaryScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Container(
-          width: 100,
-          height: 100,
-          color: blue,
-        ),
-        Container(
-          width: 100,
-          height: 100,
-          color: blue,
-        ),
-        Container(
-          width: 100,
-          height: 100,
-          color: blue,
-        ),
+        _subMenu(),
+        _subMenu(),
+        _subMenu(),
       ],
     );
   }
 
+// submenu
+  Widget _subMenu() {
+    return Container(
+      width: 80,
+      height: 90,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+              color: black1.withOpacity(0.2),
+              blurRadius: 45,
+              offset: Offset(0, 1),
+              spreadRadius: 0),
+        ],
+      ),
+    );
+  }
+
+// history
   Widget _history(context) {
     return SingleChildScrollView(
       child: Container(
-        margin: EdgeInsets.only(top: 20),
-        height: 265,
+        margin: EdgeInsets.only(top: 10),
+        height: 260,
         width: MediaQuery.of(context).size.width,
         child: DefaultTabController(
           length: 2,
@@ -158,14 +173,12 @@ class _SalaryScreenState extends State<SalaryScreen> {
                     ),
                     // Konten untuk tab "Out. Debt"
                     SingleChildScrollView(
-                      child: Container(
-                        child: Column(
-                          children: [
-                            _outCome(),
-                            _outCome(),
-                            _outCome(),
-                          ],
-                        ),
+                      child: Column(
+                        children: [
+                          _outCome(),
+                          _outCome(),
+                          _outCome(),
+                        ],
                       ),
                     ),
                   ],
@@ -180,7 +193,27 @@ class _SalaryScreenState extends State<SalaryScreen> {
 
   // subtitle
   Widget _subtitle() {
-    return Text("History");
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Row(
+        children: [
+          Text(
+            "History",
+            style: GoogleFonts.poppins(
+                fontSize: 20, color: Colors.grey, fontWeight: FontWeight.w600),
+          ),
+          Spacer(),
+          Text(
+            "Detail",
+            style: TextStyle(color: Colors.grey),
+          ),
+          Icon(
+            IconlyLight.arrowRight,
+            color: Colors.grey,
+          )
+        ],
+      ),
+    );
   }
 
   // income
