@@ -30,6 +30,7 @@ const SizedBox sizedBoxH20 = SizedBox(height: 20);
 const SizedBox sizedBoxH25 = SizedBox(height: 25);
 const SizedBox sizedBoxH30 = SizedBox(height: 30);
 const SizedBox sizedBoxH40 = SizedBox(height: 40);
+const SizedBox sizedBoxW10 = SizedBox(width: 10);
 
 // local address
-const String localAddress = "10.20.25.165";
+const String localAddress = "10.77.21.146";
