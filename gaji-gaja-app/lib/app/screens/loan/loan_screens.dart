@@ -173,306 +173,6 @@ class _LoanScreenState extends State<LoanScreen> {
     );
   }
 
-// outstanding loan
-  Widget _outstandingLoan(context) {
-    return Container(
-      padding: EdgeInsets.all(25),
-      margin: EdgeInsets.only(top: 20, left: 10, right: 10),
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(35),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          sizedBoxH10,
-          // button
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Amount Loan",
-                          style: GoogleFonts.poppins(color: Colors.grey),
-                        ),
-                        Text(
-                          'Rp. 1000.000',
-                          style: GoogleFonts.poppins(
-                              fontSize: 25,
-                              color: black1,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        sizedBoxH10,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.date_range_rounded,
-                              color: Colors.grey,
-                              size: 25,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "doe date",
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 11),
-                                    ),
-                                    Text(
-                                      "20/10/2023",
-                                      style: TextStyle(fontSize: 11),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Spacer(),
-              Column(
-                children: [
-                  Container(
-                    height: 60,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(45), // Radius sudut tombol
-                        ),
-                        primary: blue, // Warna latar belakang tombol
-                      ),
-                      onPressed: () {
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(
-                                  40.0), // Set the top border radius
-                            ),
-                          ),
-                          builder: (BuildContext context) {
-                            return Container(
-                              height: MediaQuery.of(context).size.height / 2,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(
-                                      20.0), // Set the top border radius
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5, bottom: 40),
-                                    height: 7,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                  ),
-
-                                  // LOGIN FORM USIGN PIN
-                                  const PayLoanView(),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      child: Text(
-                        "Pay Now",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  // outstanding debt
-  Widget _outstandingDebt(context) {
-    return Container(
-      padding: EdgeInsets.all(25),
-      margin: EdgeInsets.only(top: 20, left: 10, right: 10),
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(35),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          sizedBoxH10,
-          // button
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Amount Debt",
-                          style: GoogleFonts.poppins(color: Colors.grey),
-                        ),
-                        Text(
-                          'Rp. 1000.000',
-                          style: GoogleFonts.poppins(
-                              fontSize: 25,
-                              color: black1,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        sizedBoxH10,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.date_range_rounded,
-                              color: Colors.grey,
-                              size: 25,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "doe date",
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 11),
-                                    ),
-                                    Text(
-                                      "20/10/2023",
-                                      style: TextStyle(fontSize: 11),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Spacer(),
-              Column(
-                children: [
-                  Container(
-                    height: 60,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(45), // Radius sudut tombol
-                        ),
-                        primary: orange, // Warna latar belakang tombol
-                      ),
-                      onPressed: () {
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(
-                                  40.0), // Set the top border radius
-                            ),
-                          ),
-                          builder: (BuildContext context) {
-                            return Container(
-                              height: MediaQuery.of(context).size.height / 2,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(
-                                      20.0), // Set the top border radius
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5, bottom: 40),
-                                    height: 7,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                  ),
-
-                                  // LOGIN FORM USIGN PIN
-                                  const RePayLoan(),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      child: Text(
-                        "Repay Loan",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   // tabbar
   Widget _tabBar(context) {
     return Container(
@@ -514,9 +214,154 @@ class _LoanScreenState extends State<LoanScreen> {
                     child: Container(
                       child: Column(
                         children: [
-                          _outstandingLoan(context),
-                          _outstandingLoan(context),
-                          _outstandingLoan(context),
+                          sizedBoxH20,
+                          ListOut(
+                            amount: "1.000.000",
+                            btnText: "Pay Now",
+                            color: blue,
+                            date: "20/10/2023",
+                            text: "Amount Loan",
+                            onPress: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(
+                                        40.0), // Set the top border radius
+                                  ),
+                                ),
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height:
+                                        MediaQuery.of(context).size.height / 2,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(
+                                            20.0), // Set the top border radius
+                                      ),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 5, bottom: 40),
+                                          height: 7,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+
+                                        // LOGIN FORM USIGN PIN
+                                        const PayLoanView(),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          ListOut(
+                            amount: "2.000.000",
+                            btnText: "Pay Now",
+                            color: blue,
+                            date: "21/10/2023",
+                            text: "Amount Loan",
+                            onPress: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(
+                                        40.0), // Set the top border radius
+                                  ),
+                                ),
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height:
+                                        MediaQuery.of(context).size.height / 2,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(
+                                            20.0), // Set the top border radius
+                                      ),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 5, bottom: 40),
+                                          height: 7,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+
+                                        // LOGIN FORM USIGN PIN
+                                        const PayLoanView(),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          ListOut(
+                            amount: "3.000.000",
+                            btnText: "Pay Now",
+                            color: blue,
+                            date: "22/10/2023",
+                            text: "Amount Loan",
+                            onPress: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(
+                                        40.0), // Set the top border radius
+                                  ),
+                                ),
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height:
+                                        MediaQuery.of(context).size.height / 2,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(
+                                            20.0), // Set the top border radius
+                                      ),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 5, bottom: 40),
+                                          height: 7,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+
+                                        // LOGIN FORM USIGN PIN
+                                        const PayLoanView(),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -526,9 +371,154 @@ class _LoanScreenState extends State<LoanScreen> {
                     child: Container(
                       child: Column(
                         children: [
-                          _outstandingDebt(context),
-                          _outstandingDebt(context),
-                          _outstandingDebt(context),
+                          sizedBoxH20,
+                          ListOut(
+                            amount: "1.000.000",
+                            btnText: "Repay Now",
+                            color: orange,
+                            date: "20/10/2023",
+                            text: "Amount Debt",
+                            onPress: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(
+                                        40.0), // Set the top border radius
+                                  ),
+                                ),
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height:
+                                        MediaQuery.of(context).size.height / 2,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(
+                                            20.0), // Set the top border radius
+                                      ),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 5, bottom: 40),
+                                          height: 7,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+
+                                        // LOGIN FORM USIGN PIN
+                                        const PayLoanView(),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          ListOut(
+                            amount: "2.000.000",
+                            btnText: "Repay Now",
+                            color: orange,
+                            date: "21/10/2023",
+                            text: "Amount Debt",
+                            onPress: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(
+                                        40.0), // Set the top border radius
+                                  ),
+                                ),
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height:
+                                        MediaQuery.of(context).size.height / 2,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(
+                                            20.0), // Set the top border radius
+                                      ),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 5, bottom: 40),
+                                          height: 7,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+
+                                        // LOGIN FORM USIGN PIN
+                                        const PayLoanView(),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          ListOut(
+                            amount: "3.000.000",
+                            btnText: "Repay Now",
+                            color: orange,
+                            date: "22/10/2023",
+                            text: "Amount Debt",
+                            onPress: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(
+                                        40.0), // Set the top border radius
+                                  ),
+                                ),
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height:
+                                        MediaQuery.of(context).size.height / 2,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(
+                                            20.0), // Set the top border radius
+                                      ),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 5, bottom: 40),
+                                          height: 7,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+
+                                        // LOGIN FORM USIGN PIN
+                                        const PayLoanView(),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -538,6 +528,135 @@ class _LoanScreenState extends State<LoanScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ListOut extends StatelessWidget {
+  const ListOut(
+      {Key? key,
+      required this.onPress,
+      required this.amount,
+      required this.text,
+      required this.btnText,
+      required this.date,
+      required this.color})
+      : super(key: key);
+
+  final VoidCallback onPress;
+  final String text;
+  final String amount;
+  final String btnText;
+  final String date;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(25),
+      margin: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(35),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          sizedBoxH10,
+          // button
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          text,
+                          style: GoogleFonts.poppins(color: Colors.grey),
+                        ),
+                        Text(
+                          'Rp. $amount',
+                          style: GoogleFonts.poppins(
+                              fontSize: 25,
+                              color: black1,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        sizedBoxH10,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.date_range_rounded,
+                              color: Colors.grey,
+                              size: 25,
+                            ),
+                            sizedBoxW10,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      "doe date",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 11),
+                                    ),
+                                    Text(
+                                      date,
+                                      style: const TextStyle(fontSize: 11),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Column(
+                children: [
+                  Container(
+                    height: 60,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(45), // Radius sudut tombol
+                        ),
+                        primary: color, // Warna latar belakang tombol
+                      ),
+                      onPressed: onPress,
+                      child: Text(
+                        btnText,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ],
       ),
     );
   }
